@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/antitoxic/Pet_Projects/TelegramBot/TelegramBot/TelegramBot.csproj": {}
+    "C:\\_Alex\\Code\\TelegramBot\\TelegramBot\\TelegramBot.csproj": {}
   },
   "projects": {
-    "/Users/antitoxic/Pet_Projects/TelegramBot/TelegramBot/TelegramBot.csproj": {
+    "C:\\_Alex\\Code\\TelegramBot\\TelegramBot\\TelegramBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/antitoxic/Pet_Projects/TelegramBot/TelegramBot/TelegramBot.csproj",
+        "projectUniqueName": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot\\TelegramBot.csproj",
         "projectName": "TelegramBot",
-        "projectPath": "/Users/antitoxic/Pet_Projects/TelegramBot/TelegramBot/TelegramBot.csproj",
-        "packagesPath": "/Users/antitoxic/.nuget/packages/",
-        "outputPath": "/Users/antitoxic/Pet_Projects/TelegramBot/TelegramBot/obj/",
+        "projectPath": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot\\TelegramBot.csproj",
+        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+        "outputPath": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/antitoxic/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

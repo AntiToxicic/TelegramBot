@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "7UZ1GVeZ7FwReIV6HjKeh/Yn+MjKnPzs3xZRsA4plADMkzMjiNcIC1U81TE0+DZ0s5l9HzgbJjG7aS9NLxgxYA==",
+  "dgSpecHash": "X0UAHALZl8Fuv+UltahyiZ/ZNHTq5bRkDRpky8LFW/yF132CXucAu69/5Mwn5z7o8NrBoBShlP+ge9ND7nxDmw==",
   "success": true,
-  "projectFilePath": "/Users/antitoxic/Pet_Projects/TelegramBot/TelegramBot/TelegramBot.csproj",
+  "projectFilePath": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot\\TelegramBot.csproj",
   "expectedPackageFiles": [
-    "/Users/antitoxic/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
-    "/Users/antitoxic/.nuget/packages/telegram.bot/19.0.0/telegram.bot.19.0.0.nupkg.sha512"
+    "C:\\Users\\Alex\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\telegram.bot\\19.0.0\\telegram.bot.19.0.0.nupkg.sha512"
   ],
   "logs": []
 }
