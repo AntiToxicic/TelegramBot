@@ -4,12 +4,13 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults; //inline menu
+using Microsoft.Extensions.Configuration;
 
+var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
 
 HttpClient httpClient = new();
 
-
-string token = System.IO.File.ReadAllText("token.txt");
+string token = config["token"];
 
 var botClient = new TelegramBotClient(token, httpClient);
 

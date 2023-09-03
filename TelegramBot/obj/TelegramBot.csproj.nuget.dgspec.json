@@ -40,6 +40,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0-preview.7.23375.6, )"
+            },
+            "Microsoft.Extensions.Configuration.UserSecrets": {
+              "target": "Package",
+              "version": "[8.0.0-preview.7.23375.6, )"
+            },
             "Telegram.Bot": {
               "target": "Package",
               "version": "[19.0.0, )"
