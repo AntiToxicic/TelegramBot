@@ -33,10 +33,17 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
         case "/complain": 
             CommandMenu.Complain(chatId);
          return;
+
         case "/statistic": 
             CommandMenu.Statistic(chatId);
          return;
     }
+    
+    Func<string, string>? func = Answers.DefineAnswer(chatId);
+    
+
+
+
 
     
 

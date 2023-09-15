@@ -687,26 +687,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Alex\\.nuget\\packages\\": {}
+    "/Users/antitoxic/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot\\TelegramBot.csproj",
+      "projectUniqueName": "/Users/antitoxic/git/TelegramBot/TelegramBot/TelegramBot.csproj",
       "projectName": "TelegramBot",
-      "projectPath": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot\\TelegramBot.csproj",
-      "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot\\obj\\",
+      "projectPath": "/Users/antitoxic/git/TelegramBot/TelegramBot/TelegramBot.csproj",
+      "packagesPath": "/Users/antitoxic/.nuget/packages/",
+      "outputPath": "/Users/antitoxic/git/TelegramBot/TelegramBot/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/antitoxic/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -754,7 +753,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
       }
     }
   }
