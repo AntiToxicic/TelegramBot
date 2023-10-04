@@ -7,7 +7,8 @@ using TelegramBot;
 
 //token
 var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-string token = config["token"];                                                             
+string token = config["token"];
+
 
 //connect to bot
 HttpClient httpClient = new();
@@ -24,110 +25,54 @@ botClient.StartReceiving(
     pollingErrorHandler: HandlePollingErrorAsync
 );
 
+
 async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
 {
+    Console.WriteLine("check");
     var chatId = update.Message.Chat.Id;
-    
-    switch (update.Message.Text)
-    {
-        case "/complain": 
-            CommandMenu.Complain(chatId);
-         return;
-
-        case "/statistic": 
-            CommandMenu.Statistic(chatId);
-         return;
-    }
-    
-    Func<string, string>? func = Answers.DefineAnswer(chatId);
-    
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    if(update.Message.Text == "/complain")
-    {
-        ReplyKeyboardMarkup replyKeyboardMarkup = 
-        new (new[]
-                {
-                    new KeyboardButton[] {"Да", "Нет"}
-                }
-            )
-            {
-                ResizeKeyboard = true
-            };
-
-        await botClient.SendTextMessageAsync
-        (
-            chatId: chatId,
-            text: "Че хочешь выбирай",
-            replyMarkup: replyKeyboardMarkup
-        );
-    }
+ 
+    // if(update.Message.Text == "/complain")
+    // {
+    //     ReplyKeyboardMarkup replyKeyboardMarkup = 
+    //     new (new[]
+    //             {
+    //                 new KeyboardButton[] {"Да", "Нет"}
+    //             }
+    //         )
+    //         {
+    //             ResizeKeyboard = true
+    //         };
+    //
+    //     await botClient.SendTextMessageAsync
+    //     (
+    //         chatId: chatId,
+    //         text: "Че хочешь выбирай",
+    //         replyMarkup: replyKeyboardMarkup
+    //     );
+    // }
 
     // Only process Message updates: https://core.telegram.org/bots/api#message
-    if(update.Message.Photo is {})
-    {
-        var fileId = update.Message.Photo.Last().FileId;
-        var fileInfo = await botClient.GetFileAsync(fileId);
-        var filePath = fileInfo.FilePath;
-
-        string UpNamePhoto = "downloaded Photo.jpg";
-        string path2 = @"C:/Users/Alex/Downloads/";
-
-        await using Stream stream1 = System.IO.File.Create(path2 + UpNamePhoto);
-        await botClient.DownloadFileAsync(
-            filePath: filePath,
-            destination: stream1
-        );
-
-        await botClient.SendTextMessageAsync(
-            chatId: chatId,
-            text: "Спасибо за фоточку"
-        );
-    }
+    // if(update.Message.Photo is {})
+    // {
+    //     var fileId = update.Message.Photo.Last().FileId;
+    //     var fileInfo = await botClient.GetFileAsync(fileId);
+    //     var filePath = fileInfo.FilePath;
+    //
+    //     string UpNamePhoto = "downloaded Photo.jpg";
+    //     string path2 = @"C:/Users/Alex/Downloads/";
+    //
+    //     await using Stream stream1 = System.IO.File.Create(path2 + UpNamePhoto);
+    //     await botClient.DownloadFileAsync(
+    //         filePath: filePath,
+    //         destination: stream1
+    //     );
+    //
+    //     await botClient.SendTextMessageAsync(
+    //         chatId: chatId,
+    //         text: "Спасибо за фоточку"
+    //     );
+    // }
+    
 
     if (update.Message is not {} message)
         return;

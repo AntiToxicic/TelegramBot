@@ -22,16 +22,27 @@ class Answers
 
         return state switch
         {
-            0 => SendAnswerFromMenu,
+            0 => SendAnswerFromMenu!,
+            1 => SendAnswerFromScroll!,
             _ => null
         };
     }
 
     static private string? SendAnswerFromMenu(string text)
     {
+        Random random = new();
+
         switch(text)
         {
             case toWatch: 
+                using (TbotContext db = new TbotContext())
+                {
+                    
+                    var imageId = random.Next(db.Images.ToList().Count);
+                    
+                    string? path = db.Images.ToList()[imageId].Path;
+
+                }
                 //db.Users[id].state = (int)State.ScrollImages;
             break;
 
