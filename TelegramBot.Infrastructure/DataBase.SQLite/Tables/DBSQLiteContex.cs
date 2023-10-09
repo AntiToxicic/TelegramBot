@@ -1,12 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
-namespace TelegramBot.Infrastructure.DataBase.Tables;
+namespace TelegramBot.Infrastructure.DataBase.SQLite.Tables;
 
 public class DBSQLiteContex : DbContext
 {
+        IConfiguration config = new ConfigurationBuilder()
+            .AddUserSecrets<DBSQLiteContex>()
+            .Build();
+    
     public DBSQLiteContex()
     {
-       //   Database.EnsureDeleted();
+       // Database.EnsureDeleted();
        // Database.EnsureCreated();
        Database.OpenConnection();
     
@@ -17,13 +22,15 @@ public class DBSQLiteContex : DbContext
     {
     }
 
-    public virtual DbSet<PictureDBTable> Picture { get; set; }
+    public virtual DbSet<PictureDBTable> Pictures { get; set; }
     public virtual DbSet<UserDBTable> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-        string DataBasePath = "Data Source=C://Users//Alex//Downloads//test.db";
+        var path = config.GetSection("DataBase").GetValue<string>("path");
+        var name = config.GetSection("DataBase").GetValue<string>("name");
+        string DataBasePath = "Data Source=" + path + name;
         optionsBuilder.UseSqlite(DataBasePath);
     }
+
 }

@@ -6,7 +6,6 @@ namespace TelegramBot.ApplicationCore.Interfaces;
 
 public interface IPictureService
 {
-    public Task<Picture> GetPicture(int id);
-    public Task<IReadOnlyCollection<Picture>> SendPicture(int id);
- //   public Task SavePicture(Update update);
+    public Task<Picture> GetPicture(long picId);
+    public Task RecordPicture(long chatId, long picId, string userName, string caption);
 }

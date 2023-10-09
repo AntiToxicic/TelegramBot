@@ -4,5 +4,6 @@ namespace TelegramBot.ApplicationCore.Interfaces;
 
 public interface IUserRepository
 {
-    public Task<IReadOnlyCollection<User>> GetUser(int id);
+    public Task<User> GetUser(long userId);
+    public Task RecordUser(long userId, string userName);
 }

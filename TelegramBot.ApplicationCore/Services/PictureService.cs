@@ -7,32 +7,21 @@ namespace TelegramBot.ApplicationCore.Services;
 public class PictureService : IPictureService
 {
     private IPictureRepository _pictureRepository;
-    private IPictureTransfer _pictureTransfer;
-  //  private IPictureReceive _pictureReceive;
 
     public PictureService(
         IPictureRepository pictureRepository
-        , IPictureTransfer pictureTransfer
-       // , IPictureReceive pictureReceive
        )
     {
         _pictureRepository = pictureRepository;
-        _pictureTransfer = pictureTransfer;
-       // _pictureReceive = pictureReceive;
     }
 
-    public async Task<Picture> GetPicture(int id)
+    public async Task<Picture> GetPicture(long picId)
     {
-        return await _pictureRepository.GetPicture(id);
+        return await _pictureRepository.GetPicture(picId);
     }
-
-    public async Task<IReadOnlyCollection<Picture>> SendPicture(int id)
+    
+    public async Task RecordPicture(long chatId, long picId, string userName, string caption)
     {
-        return await _pictureTransfer.SendPicture(id);
+        await _pictureRepository.RecordPicture(chatId, picId, userName, caption);
     }
-
-    // public async Task SavePicture(Update update)
-    // {
-    //     await _pictureReceive.SavePicture(update);
-    // }
 }

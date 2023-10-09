@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Telegram.Bot;
 using Telegram.Bot.Types;
-using TelegramBot.ApplicationCore.Interfaces;
-using TelegramBot.ApplicationCore.Services;
 using TelegramBot.Infrastructure;
+using TelegramBot.Telegram.Interfaces;
+using TelegramBot.Telegram.Telegram;
 
 namespace TelegramBot.Telegram.Controllers;
 
@@ -12,19 +10,26 @@ namespace TelegramBot.Telegram.Controllers;
 [Route("[controller]")]
 public class TelegramController : ControllerBase
 {
-    private IPictureReceiveFactory _pictureReceiveFactory;
+    private readonly ICommandProcessorFactory _commandProcessorFactory;
     
-    public TelegramController(IPictureReceiveFactory pictureReceiveFactory)
+    public TelegramController(ICommandProcessorFactory commandProcessorFactory)
     {
-        _pictureReceiveFactory = pictureReceiveFactory;
+        _commandProcessorFactory = commandProcessorFactory;
     }
     
     [HttpPost("webhook")]
     public async Task<IActionResult> WebHook(Update update)
     {
-        IPictureReceive pictureReceive = _pictureReceiveFactory.Process();
-        if(update.Message.Photo is {})
-            await pictureReceive.SavePicture(update);
+        switch (update.Message.Text)
+        {
+            case BotCommands.UploadPicture : 
+                ICommandProcessor commandProcessor = _commandProcessorFactory.GetCommandProcessor();
+                    await commandProcessor.Process(update);
+                break;
+           // case BotCommands.SwapPicture : 
+        }
+        
+       
         
         return Ok();
     }

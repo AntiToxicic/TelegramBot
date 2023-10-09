@@ -1,38 +1,36 @@
-﻿using TelegramBot.ApplicationCore.Entities;
+﻿using Microsoft.Extensions.Configuration;
+using TelegramBot.ApplicationCore.Entities;
 using TelegramBot.ApplicationCore.Interfaces;
-using TelegramBot.Infrastructure.DataBase.Tables;
+using TelegramBot.Infrastructure.DataBase.SQLite.Tables;
 
-namespace TelegramBot.Infrastructure.DataBase;
+namespace TelegramBot.Infrastructure.DataBase.SQLite;
 
 public class PictureRepository : IPictureRepository
 {
-    public async Task<Picture> GetPicture(int id)
+    public async Task<Picture> GetPicture(long chatId)
     {
-        PictureDBTable picture;
-        string path = "nothing";
-        string caption = "nothing";
-        
+        return new Picture();
+    }
+
+    public async Task RecordPicture(long picId, long chatId, string picPath, string caption)
+    {
         using (DBSQLiteContex db = new DBSQLiteContex())
         {
-           // PictureDBTable pc = new("C/Users/Alex", "Awsome caption"){Id = 34};
-            //db.Picture.AddRange(pc);
-           // db.SaveChanges();
-            
-          //  Console.WriteLine(db.Picture.ToList().Count);
-            foreach (var temp in db.Picture.ToList())
-            {
-              //  Console.WriteLine($"temp.Id = {temp.Id} || id = {id}");
-                if (temp.Id == id)
-                {
-                    path = temp.path;
-                    caption = temp.caption;
-                    break;
-                }
-            }
-        }
-        
-        picture = new PictureDBTable(path, caption);
+            UserDBTable user = new(userName) { Id = chatId };
 
-        return picture;
+            foreach (var e in db.Users.ToList())
+            {
+                if (e.Id == chatId)
+                    break;
+
+                db.Users.AddRange(user);
+            }
+         
+            PictureDBTable pic = new(picPath){Id = picId, UserId = user.Id};
+            
+            db.Pictures.AddRange(pic);
+            
+            db.SaveChanges();
+        }
     }
 }

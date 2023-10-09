@@ -4,11 +4,13 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <UserSecretsId>f2b3fedb-b58b-4b5a-a86b-25308ad62a14</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\TelegramBot.ApplicationCore\TelegramBot.ApplicationCore.csproj" />
     </ItemGroup>
+
 
 
     <ItemGroup>
@@ -19,6 +21,9 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
     </ItemGroup>
+
+
+
 
 
 

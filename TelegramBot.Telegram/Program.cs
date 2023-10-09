@@ -3,10 +3,12 @@ using TelegramBot.ApplicationCore.Interfaces;
 using TelegramBot.ApplicationCore.Services;
 using TelegramBot.Infrastructure;
 using TelegramBot.Infrastructure.DataBase;
+using TelegramBot.Infrastructure.DataBase.SQLite;
 using TelegramBot.Infrastructure.PictureStorage;
+using TelegramBot.Telegram.Core;
+using TelegramBot.Telegram.Factories;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddControllers().AddNewtonsoftJson();
 
@@ -14,15 +16,14 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IPictureReceiveFactory, PictureReceiveFactory>();
-builder.Services.AddScoped<PictureReceive>();
+builder.Services.AddScoped<ICommandProcessorFactory, CommandProcessorFactory>();
+builder.Services.AddScoped<PictureReceiving>();
 builder.Services.AddScoped<TelegramBotClient>(c =>
 {
     var token = builder.Configuration.GetSection("TelegramBot").GetValue<string>("token");
     return new TelegramBotClient(token);
 });
 builder.Services.AddScoped<IPictureRepository, PictureRepository>();
-builder.Services.AddScoped<IPictureTransfer, PictureTransfer>();
 builder.Services.AddScoped<IPictureService, PictureService>();
 
 var app = builder.Build();
@@ -33,7 +34,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
- app.Configuration.GetSection("TelegramBot").GetValue<string>("token");
+app.Configuration.GetSection("TelegramBot").GetValue<string>("token");
+app.Configuration.GetSection("DataBase").GetValue<string>("path");
+app.Configuration.GetSection("DataBase").GetValue<string>("name");
 
 app.UseHttpsRedirection();
 

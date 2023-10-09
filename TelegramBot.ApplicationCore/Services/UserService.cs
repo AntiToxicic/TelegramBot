@@ -12,8 +12,13 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public async Task<IReadOnlyCollection<User>> GetUser(int id)
+    public async Task<User> GetUser(long userId)
     {
-        return await _userRepository.GetUser(id);
+        return await _userRepository.GetUser(userId);
+    }
+
+    public async Task RecordUser(long userId, string userName)
+    {
+        await _userRepository.RecordUser(userId, userName);
     }
 }

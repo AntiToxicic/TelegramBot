@@ -1,10 +1,11 @@
 ﻿using TelegramBot.ApplicationCore.Entities;
 
-namespace TelegramBot.Infrastructure.DataBase.Tables;
+namespace TelegramBot.Infrastructure.DataBase.SQLite.Tables;
 
 public class UserDBTable : User
 {
-    public UserDBTable(string name) : base(name) { }
+   public UserDBTable(string name) : base(name) { }
     
-    public  Picture picture { get; set; }
+    public List<PictureDBTable> Pictures { get; set; } = new();
+
 }

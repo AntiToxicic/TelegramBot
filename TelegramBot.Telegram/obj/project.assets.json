@@ -1895,6 +1895,7 @@
       "Microsoft.AspNetCore.OpenApi >= 7.0.10",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "Telegram.Bot >= 19.0.0",
+      "TelegramBot.ApplicationCore >= 1.0.0",
       "TelegramBot.Infrastructure >= 1.0.0"
     ]
   },
@@ -1925,6 +1926,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "C:\\_Alex\\Code\\TelegramBot\\TelegramBot.ApplicationCore\\TelegramBot.ApplicationCore.csproj": {
+              "projectPath": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot.ApplicationCore\\TelegramBot.ApplicationCore.csproj"
+            },
             "C:\\_Alex\\Code\\TelegramBot\\TelegramBot.Infrastructure\\TelegramBot.Infrastructure.csproj": {
               "projectPath": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot.Infrastructure\\TelegramBot.Infrastructure.csproj"
             }

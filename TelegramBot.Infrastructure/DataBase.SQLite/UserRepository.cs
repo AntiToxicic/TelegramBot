@@ -1,13 +1,18 @@
 ﻿using TelegramBot.ApplicationCore.Entities;
 using TelegramBot.ApplicationCore.Interfaces;
 
-namespace TelegramBot.Infrastructure.DataBase;
+namespace TelegramBot.Infrastructure.DataBase.SQLite;
 
 
 public class UserRepository : IUserRepository
 {
-    public Task<IReadOnlyCollection<User>> GetUser(int id)
+    public async Task<User> GetUser(long userId)
     {
-        throw new NotImplementedException();
+        return new User("");
+    }
+
+    public async Task RecordUser(long userId, string userName)
+    {
+        
     }
 }
