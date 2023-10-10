@@ -7,4 +7,6 @@ public class BotCommands
     public const string UploadPicture = "Загрузить картинку";
     public const string SwapPicture = "Дальше";
     
+    public const string KeyToReceive = "asdfaUJHBU&^UIG";
+    
 }

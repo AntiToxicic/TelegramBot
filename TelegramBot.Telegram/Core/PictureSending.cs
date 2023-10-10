@@ -1,12 +1,34 @@
-﻿using Telegram.Bot.Types;
+﻿using Telegram.Bot;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+using TelegramBot.ApplicationCore.Entities;
+using TelegramBot.ApplicationCore.Interfaces;
+using TelegramBot.Infrastructure.DataBase.SQLite.Tables;
 using TelegramBot.Telegram.Interfaces;
 
-namespace TelegramBot.Infrastructure.PictureStorage;
+namespace TelegramBot.Telegram.Core;
 
 public class PictureSending : ICommandProcessor
 {
+    private readonly TelegramBotClient _botClient;
+    private readonly IPictureService _pictureService;
+    
+    public PictureSending(TelegramBotClient telegramBotClient,
+         IPictureService pictureService)
+    {
+        _botClient = telegramBotClient;
+        _pictureService = pictureService;
+    }
     public async Task Process(Update update)
     {
-        throw new NotImplementedException();
+        Picture picture = await _pictureService.GetPicture();
+
+        using (Stream stream = new FileStream(picture.Path, FileMode.Open))
+        {
+           await _botClient.SendPhotoAsync(
+                chatId: update.Message.Chat.Id,
+                photo: InputFile.FromStream(stream),
+                caption: picture.Caption);
+        }
     }
 }

@@ -15,13 +15,13 @@ public class PictureService : IPictureService
         _pictureRepository = pictureRepository;
     }
 
-    public async Task<Picture> GetPicture(long picId)
+    public async Task<Picture> GetPicture()
     {
-        return await _pictureRepository.GetPicture(picId);
+        return await _pictureRepository.GetPicture();
     }
     
-    public async Task RecordPicture(long chatId, long picId, string userName, string caption)
+    public async Task RecordPicture(long picId, long userId, string picPath, string caption = "Без подписи")
     {
-        await _pictureRepository.RecordPicture(chatId, picId, userName, caption);
+        await _pictureRepository.RecordPicture(picId, userId, picPath, caption);
     }
 }

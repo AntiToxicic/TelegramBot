@@ -2,12 +2,12 @@
 
 public class Picture : EntityBase
 {
-    public Picture(string path = "", string caption = "")
+    public Picture(long id, string path, string caption) : base(id)
     {
-        this.path = path;
-        this.caption = caption;
+        Path = path;
+        Caption = caption;
     }
     
-    public string path { get; set; }
-    public string caption { get; set; }
+    public string Path { get; set; }
+    public string? Caption { get; set; }
 }

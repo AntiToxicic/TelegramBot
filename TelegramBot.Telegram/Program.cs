@@ -2,11 +2,10 @@ using Telegram.Bot;
 using TelegramBot.ApplicationCore.Interfaces;
 using TelegramBot.ApplicationCore.Services;
 using TelegramBot.Infrastructure;
-using TelegramBot.Infrastructure.DataBase;
 using TelegramBot.Infrastructure.DataBase.SQLite;
-using TelegramBot.Infrastructure.PictureStorage;
 using TelegramBot.Telegram.Core;
 using TelegramBot.Telegram.Factories;
+using TelegramBot.Telegram.Messages;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -18,6 +17,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ICommandProcessorFactory, CommandProcessorFactory>();
 builder.Services.AddScoped<PictureReceiving>();
+builder.Services.AddScoped<PictureSending>();
+builder.Services.AddScoped<WrongPicture>();
+builder.Services.AddScoped<WaitingPicture>();
+builder.Services.AddScoped<StartPicture>();
+builder.Services.AddScoped<Rules>();
+
 builder.Services.AddScoped<TelegramBotClient>(c =>
 {
     var token = builder.Configuration.GetSection("TelegramBot").GetValue<string>("token");
@@ -25,6 +30,8 @@ builder.Services.AddScoped<TelegramBotClient>(c =>
 });
 builder.Services.AddScoped<IPictureRepository, PictureRepository>();
 builder.Services.AddScoped<IPictureService, PictureService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

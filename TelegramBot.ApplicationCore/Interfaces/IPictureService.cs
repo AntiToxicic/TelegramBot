@@ -6,6 +6,6 @@ namespace TelegramBot.ApplicationCore.Interfaces;
 
 public interface IPictureService
 {
-    public Task<Picture> GetPicture(long picId);
-    public Task RecordPicture(long chatId, long picId, string userName, string caption);
+    public Task<Picture> GetPicture();
+    public Task RecordPicture(long picId, long userId, string picPath, string caption = "Без подписи");
 }

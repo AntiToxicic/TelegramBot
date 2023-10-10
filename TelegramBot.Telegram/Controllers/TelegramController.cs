@@ -20,16 +20,29 @@ public class TelegramController : ControllerBase
     [HttpPost("webhook")]
     public async Task<IActionResult> WebHook(Update update)
     {
-        switch (update.Message.Text)
+        ICommandProcessor commandProcessor;
+
+        if (update.Message.Photo is { })
         {
-            case BotCommands.UploadPicture : 
-                ICommandProcessor commandProcessor = _commandProcessorFactory.GetCommandProcessor();
-                    await commandProcessor.Process(update);
-                break;
-           // case BotCommands.SwapPicture : 
+            if (LastMessage.GetMessage(update.Message.Chat.Id) == BotCommands.UploadPicture)
+            {
+                commandProcessor = _commandProcessorFactory.GetCommandProcessor(
+                    BotCommands.KeyToReceive);
+            }
+            else
+            {
+                commandProcessor = _commandProcessorFactory.GetCommandProcessor(
+                    BotCommandsExtenitons.wrongPictureUpload);
+            }
+        }
+        else
+        {
+            commandProcessor = _commandProcessorFactory.GetCommandProcessor(update.Message.Text);
         }
         
-       
+        await commandProcessor.Process(update);
+        
+        LastMessage.SaveMessage(update.Message.Chat.Id, update.Message.Text);
         
         return Ok();
     }

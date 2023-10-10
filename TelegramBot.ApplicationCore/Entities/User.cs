@@ -2,10 +2,10 @@
 
 public class User : EntityBase
 {
-    public User(string name)
+    public User(long id, string name) : base(id)
     {
-        this.name = name;
+        Name = name;
     }
     
-    public string name { get; set; }
+    public string Name { get; set; }
 }

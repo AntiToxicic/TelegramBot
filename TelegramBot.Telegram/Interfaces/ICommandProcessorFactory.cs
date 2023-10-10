@@ -5,5 +5,5 @@ namespace TelegramBot.Infrastructure;
 
 public interface ICommandProcessorFactory
 {
-    public ICommandProcessor GetCommandProcessor();
+    public ICommandProcessor GetCommandProcessor(string text);
 }
