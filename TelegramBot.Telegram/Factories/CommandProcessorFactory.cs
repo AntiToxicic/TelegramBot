@@ -27,7 +27,7 @@ public class CommandProcessorFactory : ICommandProcessorFactory
             case BotCommands.UploadPicture: return _serviceProvider.GetRequiredService<WaitingPicture>();
             case BotCommands.start: return _serviceProvider.GetRequiredService<StartPicture>();
             case BotCommands.rules: return _serviceProvider.GetRequiredService<Rules>();
-            default: return _serviceProvider.GetRequiredService<WrongPicture>();
+            default: return _serviceProvider.GetRequiredService<NoAnswer>();
         }
     }
 }

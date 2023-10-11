@@ -22,6 +22,7 @@ builder.Services.AddScoped<WrongPicture>();
 builder.Services.AddScoped<WaitingPicture>();
 builder.Services.AddScoped<StartPicture>();
 builder.Services.AddScoped<Rules>();
+builder.Services.AddScoped<NoAnswer>();
 
 builder.Services.AddScoped<TelegramBotClient>(c =>
 {

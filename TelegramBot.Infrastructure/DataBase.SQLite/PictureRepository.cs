@@ -7,34 +7,45 @@ namespace TelegramBot.Infrastructure.DataBase.SQLite;
 
 public class PictureRepository : IPictureRepository
 {
+    /// <summary>
+    /// Get random Picture from Db
+    /// </summary>
     public async Task<Picture> GetPicture()
     {
+        Picture picture;
         Random random = new ();
-        
-        long id;
-        string path, caption;
-        int tempCount;
         
         using (DBSQLiteContex db = new DBSQLiteContex())
         {
-            // Console.WriteLine(db.ToString());
             var tempList = await db.Pictures.ToListAsync();
-            tempCount = random.Next(tempList.Count);
-            
-            id = tempList[tempCount].Id;
-            path = tempList[tempCount].Path;
-            caption = tempList[tempCount].Caption;
+            int tempCount = random.Next(tempList.Count);
+
+            picture = tempList[tempCount];
         }
+
+        return picture;
+    }
+    
+    /// <summary>
+    /// Get certain Picture from Db by id
+    /// </summary>
+    public async Task<Picture> GetPicture(long picId)
+    {
+        Picture picture;
         
-        Console.WriteLine($"id = {id}\npath = {path}\ncaption = {caption}");
-        
-        return new Picture(
-            id: id,
-            path: path,
-            caption: caption);
-       // return new Picture(1, "sd", "23");
+        using (DBSQLiteContex db = new DBSQLiteContex())
+        {
+            var tempList = await db.Pictures.ToListAsync();
+
+            picture = tempList.Find(e => e.Id == picId);
+        }
+
+        return picture;
     }
 
+    /// <summary>
+    /// Record data about Picture in Db
+    /// </summary>
     public async Task RecordPicture(long picId, long userId, string picPath, string caption = "Без подписи")
     {
         PictureDBTable pic = new(picId, userId, picPath, caption);

@@ -1,9 +1,7 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 using TelegramBot.ApplicationCore.Entities;
 using TelegramBot.ApplicationCore.Interfaces;
-using TelegramBot.Infrastructure.DataBase.SQLite.Tables;
 using TelegramBot.Telegram.Interfaces;
 
 namespace TelegramBot.Telegram.Core;

@@ -8,9 +8,7 @@ public class PictureService : IPictureService
 {
     private IPictureRepository _pictureRepository;
 
-    public PictureService(
-        IPictureRepository pictureRepository
-       )
+    public PictureService(IPictureRepository pictureRepository)
     {
         _pictureRepository = pictureRepository;
     }
@@ -18,6 +16,11 @@ public class PictureService : IPictureService
     public async Task<Picture> GetPicture()
     {
         return await _pictureRepository.GetPicture();
+    }
+    
+    public async Task<Picture> GetPicture(long id)
+    {
+        return await _pictureRepository.GetPicture(id);
     }
     
     public async Task RecordPicture(long picId, long userId, string picPath, string caption = "Без подписи")
