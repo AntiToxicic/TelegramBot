@@ -20,6 +20,8 @@ public class TelegramController : ControllerBase
     [HttpPost("webhook")]
     public async Task<IActionResult> WebHook(Update update)
     {
+        Console.WriteLine("WebHook was accept!");
+        
         ICommandProcessor commandProcessor;
 
         if (update.Message.Photo is { })
