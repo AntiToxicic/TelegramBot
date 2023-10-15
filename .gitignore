@@ -477,4 +477,5 @@ s
 *.lnk
 
 # ignore for Faketogosamogo
+Pictures/
 .idea/

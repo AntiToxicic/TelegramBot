@@ -1,5 +1,6 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 using TelegramBot.Telegram.Interfaces;
 using TelegramBot.Telegram.Telegram;
 
@@ -18,9 +19,15 @@ public class StartPicture : ICommandProcessor
     
     public async Task Process(Update update)
     {
+        ReplyKeyboardMarkup replyKeyboardMarkup =new(new[]
+            {
+                new KeyboardButton[] {"Да", "Нет"}
+            }) { ResizeKeyboard = true };
+        
         await _telegramBotClient.SendTextMessageAsync(
             chatId: update.Message.Chat.Id,
-            text: BotAnswers.start
+            text: BotAnswers.start,
+            replyMarkup: replyKeyboardMarkup
         );
         
         using (Stream stream = new FileStream(
