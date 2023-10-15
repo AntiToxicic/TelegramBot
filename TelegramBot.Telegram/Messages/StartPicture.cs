@@ -21,7 +21,7 @@ public class StartPicture : ICommandProcessor
     {
         ReplyKeyboardMarkup replyKeyboardMarkup =new(new[]
             {
-                new KeyboardButton[] {"Да", "Нет"}
+                new KeyboardButton[] {BotCommands.SwapPicture, BotCommands.UploadPicture}
             }) { ResizeKeyboard = true };
         
         await _telegramBotClient.SendTextMessageAsync(
