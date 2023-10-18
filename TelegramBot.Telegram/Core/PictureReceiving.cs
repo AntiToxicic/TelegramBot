@@ -53,7 +53,7 @@ public class PictureReceiving : ICommandProcessor
             userId: update.Message.Chat.Id,
             picId: picId,
             picPath: picPath + picName,
-            caption: update.Message.Text
+            caption: update.Message.Caption
         );
         
         await _botClient.SendTextMessageAsync(

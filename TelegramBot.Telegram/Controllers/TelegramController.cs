@@ -24,7 +24,7 @@ public class TelegramController : ControllerBase
         
         ICommandProcessor commandProcessor;
 
-        if (update.Message.Photo is { })
+        if (update.Message?.Photo is { })
         {
             if (LastMessage.GetMessage(update.Message.Chat.Id) == BotCommands.UploadPicture)
             {
