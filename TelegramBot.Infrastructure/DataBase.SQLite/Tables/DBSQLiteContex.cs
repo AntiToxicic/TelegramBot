@@ -12,9 +12,13 @@ public class DBSQLiteContex : DbContext
     public DBSQLiteContex()
     {
        // Database.EnsureDeleted();
-       // Database.EnsureCreated();
-       Database.OpenConnection();
-    
+       // Database.OpenConnection();
+       try
+       {
+           Database.EnsureCreated();
+
+       }
+       catch (Exception e){}
     }
 
     public DBSQLiteContex(DbContextOptions<DBSQLiteContex> options)
@@ -27,10 +31,8 @@ public class DBSQLiteContex : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var path = config.GetSection("DataBase").GetValue<string>("path");
         var name = config.GetSection("DataBase").GetValue<string>("name");
-        string DataBasePath = "Data Source=" + path + name;
-        optionsBuilder.UseSqlite(DataBasePath);
+        var password = config.GetSection("DataBase").GetValue<string>("password");
+        optionsBuilder.UseNpgsql($"Host=localhost;Port=5432;Database={name};Username=postgres;Password={password}");
     }
-
 }

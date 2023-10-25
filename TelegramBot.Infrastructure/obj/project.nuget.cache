@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JbbhId+b5VWVaBUdt6tsyXpuSWxjwc/XDb3oBm3vRuVqR9RYljt7Hwd4LYVH/Ndj9dN+5px7a85TnOFtex7XwQ==",
+  "dgSpecHash": "GI2jXPesQ/vTvmd+vxPJUvk/9KHR28lUvxNGE3BTC3TuHh+MOTVANU9Y4dIzCgSyP8cQzgwQlx4NvJyvGRTdRg==",
   "success": true,
   "projectFilePath": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot.Infrastructure\\TelegramBot.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,8 @@
     "C:\\Users\\Alex\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.11\\npgsql.entityframeworkcore.postgresql.7.0.11.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.4\\sqlitepclraw.bundle_e_sqlite3.2.1.4.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\sqlitepclraw.core\\2.1.4\\sqlitepclraw.core.2.1.4.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.4\\sqlitepclraw.lib.e_sqlite3.2.1.4.nupkg.sha512",
