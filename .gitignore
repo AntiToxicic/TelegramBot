@@ -17,6 +17,9 @@
 mono_crash.*
 
 # Build results
+bin/
+Pictures/
+.idea/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -476,6 +479,5 @@ s
 # Windows shortcuts
 *.lnk
 
-# ignore for Faketogosamogo
-Pictures/
-.idea/
+# Databases
+*.db
