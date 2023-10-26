@@ -17,7 +17,7 @@
 mono_crash.*
 
 # Build results
-bin/
+**/bin
 Pictures/
 .idea/
 [Dd]ebug/
