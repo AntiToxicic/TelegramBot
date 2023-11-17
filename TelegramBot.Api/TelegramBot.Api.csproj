@@ -5,6 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>56b58fc6-30bb-45ba-89e7-0f2baf45a2a0</UserSecretsId>
+        <RootNamespace>TelegramBot.Telegram</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
