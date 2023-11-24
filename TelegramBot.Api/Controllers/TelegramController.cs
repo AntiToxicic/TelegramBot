@@ -22,7 +22,6 @@ public class TelegramController : ControllerBase
     [HttpPost("webhook")]
     public async Task<IActionResult> WebHook(Update update)
     {
-        Console.WriteLine(BotTextAnswers.CONTINUE +"--------------text");
         var msg = update.Message!;
         Statuses status;
 
@@ -94,7 +93,6 @@ public class TelegramController : ControllerBase
                 } 
                 else if (msg.Text == TelegramCommands.GETBACK)
                 {
-                    Console.WriteLine(BotTextAnswers.CONTINUE + "==== countinue");
                     await _mediator.Send(new SendMessageCommand(
                         Message: BotTextAnswers.CONTINUE,
                         ChatId: msg.Chat.Id,

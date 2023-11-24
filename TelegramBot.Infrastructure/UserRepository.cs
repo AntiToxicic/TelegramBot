@@ -30,7 +30,6 @@ public class UserRepository : IUserRepository
 
     public async Task SetStatusAsync(Statuses status, long chatId)
     {
-        Console.WriteLine(status);
          await _context.Users
             .Where(u => u.Id == chatId)
             .ExecuteUpdateAsync(b =>

@@ -24,8 +24,9 @@ public class PictureRepository : IPictureRepository
 
     public async Task<Picture?> GetRandomPictureInfoAsync()
     {
-        Random rand = new Random();  
-        int toSkip = rand.Next(1, _context.Pictures.Count()) - 1;
+        Random rand = new Random();
+        int toSkip = rand.Next(_context.Pictures.Count());
+        
         return  _context.Pictures.Skip(toSkip).FirstOrDefault();
     }
 

@@ -19,9 +19,7 @@ public class SendRandomPictureCommandHandler : IRequestHandler<SendRandomPicture
     public async Task Handle(SendRandomPictureCommand request, CancellationToken cancellationToken)
     {
         
-        Console.WriteLine("Get Random Picture start");
         Picture? picture = await _pictureRepository.GetRandomPictureInfoAsync();
-        Console.WriteLine("Get Random Picture is work");
         await _pictureSender.SendPictureAsync(
             picture, 
             request.chatId,
