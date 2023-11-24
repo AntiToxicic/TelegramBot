@@ -2,9 +2,6 @@
 
 public class EntityBase
 {
-    public EntityBase(long id)
-    {
-        Id = id;
-    }
-    public long Id { get; set; }
+    public long Id { get; init; }
+    public DateTimeOffset CreatedAt { get; } = DateTimeOffset.UtcNow;
 }

@@ -1,11 +1,19 @@
+using System.Net.NetworkInformation;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
+using TelegramBot.ApplicationCore;
+using TelegramBot.ApplicationCore.Handlers.Commands;
+using TelegramBot.ApplicationCore.Handlers.Queries;
 using TelegramBot.ApplicationCore.Interfaces;
-using TelegramBot.ApplicationCore.Services;
+using TelegramBot.ApplicationCore.Message.Handlers.Commands;
+using TelegramBot.ApplicationCore.Message.Requests.Commands;
+using TelegramBot.ApplicationCore.Requests.Commands;
+using TelegramBot.ApplicationCore.Requests.Queries;
 using TelegramBot.Infrastructure;
-using TelegramBot.Infrastructure.DataBase.SQLite;
-using TelegramBot.Telegram.Core;
-using TelegramBot.Telegram.Factories;
-using TelegramBot.Telegram.Messages;
+using TelegramBot.Telegram;
+using TelegramBot.Telegram.Common;
+using TelegramBot.Telegram.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -15,24 +23,33 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ICommandProcessorFactory, CommandProcessorFactory>();
-builder.Services.AddScoped<PictureReceiving>();
-builder.Services.AddScoped<PictureSending>();
-builder.Services.AddScoped<WrongPicture>();
-builder.Services.AddScoped<WaitingPicture>();
-builder.Services.AddScoped<StartPicture>();
-builder.Services.AddScoped<Rules>();
-builder.Services.AddScoped<NoAnswer>();
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(Ping).Assembly));
 
-builder.Services.AddScoped<TelegramBotClient>(c =>
+builder.Services.AddScoped<ITelegramBotClient>(c =>
 {
     var token = builder.Configuration.GetSection("TelegramBot").GetValue<string>("token");
     return new TelegramBotClient(token);
 });
-builder.Services.AddScoped<IPictureRepository, PictureRepository>();
-builder.Services.AddScoped<IPictureService, PictureService>();
+
+builder.Services.AddScoped<PostgresContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPictureRepository, PictureRepository>();
+builder.Services.AddScoped<IPictureDownloader, PictureDownloader>();
+builder.Services.AddScoped<IPictureSender, PictureSender>();
+builder.Services.AddScoped<IUserInfoReceiving, UserInfoReceiving>();
+builder.Services.AddScoped<IKeyboardMarkupConstructor, KeyboardMarkupConstructor>();
+builder.Services.AddScoped<IMessageSender, MessageSender>();
+
+builder.Services.AddScoped<IRequestHandler<SavePictureCommand>, SavePictureCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<SendFirstPictureCommand>, SendFirstPictureCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<SendRandomPictureCommand>, SendRandomPictureCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<SaveUserInfoCommand>, SaveUserInfoCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<SendMessageCommand>, SendMessageCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<GetUserStatusCommand, Statuses>, GetUserStatusCommandHandler>();
+builder.Services.AddScoped<TelegramCommands>();
+builder.Services.AddScoped<BotTextAnswers>();
+
 
 var app = builder.Build();
 
@@ -42,9 +59,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.Configuration.GetSection("TelegramBot").GetValue<string>("token");
-app.Configuration.GetSection("DataBase").GetValue<string>("path");
-app.Configuration.GetSection("DataBase").GetValue<string>("name");
 
 app.UseHttpsRedirection();
 

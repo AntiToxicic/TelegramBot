@@ -2,10 +2,13 @@
 
 public class User : EntityBase
 {
-    public User(long id, string name) : base(id)
+    public User(long id, string? name, Statuses status = Statuses.START)
     {
+        Id = id;
         Name = name;
+        Status = status;
     }
-    
-    public string Name { get; set; }
+
+    public string? Name { get; set; }
+    public Statuses Status { get; set; }
 }
