@@ -10,23 +10,18 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
 {
     private readonly IPictureRepository _pictureRepository;
     private readonly IPictureDownloader _pictureDownloader;
-    private readonly ITelegramBotClient _botClient;
     
-    public SavePictureCommandHandler(IPictureRepository pictureRepository, IPictureDownloader pictureDownloader, ITelegramBotClient botClient)
+    public SavePictureCommandHandler(IPictureRepository pictureRepository, IPictureDownloader pictureDownloader)
     {
         _pictureRepository = pictureRepository;
         _pictureDownloader = pictureDownloader;
-        _botClient = botClient;
     }
 
 
     public async Task Handle(SavePictureCommand request, CancellationToken cancellationToken)
     {
-        var path = (await _botClient.GetFileAsync(request.PicId)).FilePath!;
-        
         Picture picture = await _pictureDownloader.DownloadAsync(
             picId: request.PicId,
-            filePath: path,
             caption: request.Caption,
             userId: request.UserId);
         
