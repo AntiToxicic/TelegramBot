@@ -36,7 +36,7 @@ public class TelegramController : ControllerBase
             status = Statuses.START;
         } 
         else
-            status = await _mediator.Send(new GetUserStatusCommand(msg.Chat.Id));
+            status = (await _mediator.Send(new GetUserCommand(msg.Chat.Id))).Status;
         #endregion
 
         if (msg.Text == TelegramCommands.RULES)

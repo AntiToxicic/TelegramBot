@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using TelegramBot.ApplicationCore;
+using TelegramBot.ApplicationCore.Entities;
 using TelegramBot.ApplicationCore.Handlers.Commands;
 using TelegramBot.ApplicationCore.Handlers.Queries;
 using TelegramBot.ApplicationCore.Interfaces;
@@ -46,7 +47,7 @@ builder.Services.AddScoped<IRequestHandler<SendFirstPictureCommand>, SendFirstPi
 builder.Services.AddScoped<IRequestHandler<SendRandomPictureCommand>, SendRandomPictureCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<SaveUserInfoCommand>, SaveUserInfoCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<SendMessageCommand>, SendMessageCommandHandler>();
-builder.Services.AddScoped<IRequestHandler<GetUserStatusCommand, Statuses>, GetUserStatusCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<GetUserCommand, User>, GetUserCommandHandler>();
 builder.Services.AddScoped<TelegramCommands>();
 builder.Services.AddScoped<BotTextAnswers>();
 

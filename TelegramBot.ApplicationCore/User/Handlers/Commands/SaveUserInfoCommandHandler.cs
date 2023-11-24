@@ -18,7 +18,7 @@ public class SaveUserInfoCommandHandler : IRequestHandler<SaveUserInfoCommand>
 
     public async Task Handle(SaveUserInfoCommand request, CancellationToken cancellationToken)
     {
-        User user = await _userInfoReceiving.GetUserInfoAsync(request.UserId);
+        User user = await _userInfoReceiving.GetUserAsync(request.UserId);
 
         await _userRepository.AddUserAsync(user);
     }

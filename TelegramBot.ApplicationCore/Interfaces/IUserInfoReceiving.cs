@@ -4,5 +4,5 @@ namespace TelegramBot.ApplicationCore.Interfaces;
 
 public interface IUserInfoReceiving
 {
-    Task<User> GetUserInfoAsync(long chatId);
+    Task<User> GetUserAsync(long chatId);
 }

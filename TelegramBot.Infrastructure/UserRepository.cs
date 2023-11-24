@@ -25,8 +25,8 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task<User?> GetUserAsync(long chatId) =>
-        _context.Users.FirstOrDefaultAsync(c => c.Id == chatId);
+    public Task<User> GetUserAsync(long chatId) =>
+        _context.Users.FirstOrDefaultAsync(c => c.Id == chatId)!;
 
     public async Task SetStatusAsync(Statuses status, long chatId)
     {
@@ -36,7 +36,4 @@ public class UserRepository : IUserRepository
                 b.SetProperty(u => u.Status, status));
          await _context.SaveChangesAsync();
     }
-
-    public async Task<Statuses> GetStatusAsync(long chatId) =>
-        (await _context.Users.FirstOrDefaultAsync(c => c.Id == chatId))!.Status;
 }

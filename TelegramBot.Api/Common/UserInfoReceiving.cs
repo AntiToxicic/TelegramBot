@@ -13,7 +13,7 @@ public class UserInfoReceiving : IUserInfoReceiving
         _botClient = botClient;
     }
 
-    public async Task<User> GetUserInfoAsync(long chatId)
+    public async Task<User> GetUserAsync(long chatId)
     {
         var chat = await _botClient.GetChatAsync(chatId);
 
