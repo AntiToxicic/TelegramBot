@@ -20,7 +20,7 @@ public class MessageSender : IMessageSender
     public async Task SendMessage(string message, long chatId, Statuses status)
     {
         var markup = _markupConstructor.GetMarkup(status);
-
+        
         await _botClient.SendTextMessageAsync(
             chatId: chatId,
             text: message,

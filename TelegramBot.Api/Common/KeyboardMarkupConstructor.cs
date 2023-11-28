@@ -18,7 +18,8 @@ public class KeyboardMarkupConstructor : IKeyboardMarkupConstructor
                     { OK };
                 break;
             case Statuses.WATCH : keyboardButton = new KeyboardButton[] 
-                    { GETPICUTRE,
+                    { LIKE, 
+                        GETPICUTRE,
                         UPLOADPICTURE };
                 break;
             case Statuses.AWAITPICTURE : keyboardButton = new KeyboardButton[] 

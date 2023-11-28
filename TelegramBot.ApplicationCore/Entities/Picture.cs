@@ -12,4 +12,5 @@ public class Picture : EntityBase
     public string Path { get; set; }
     public string? Caption { get; set; }
     public long UserId { get; set; }
+    public int? Likes { get; set; } = 0;
 }

@@ -9,20 +9,26 @@ public class SendRandomPictureCommandHandler : IRequestHandler<SendRandomPicture
 {
     private readonly IPictureSender _pictureSender;
     private readonly IPictureRepository _pictureRepository;
+    private readonly IUserRepository _userRepository;
 
-    public SendRandomPictureCommandHandler(IPictureSender pictureSender, IPictureRepository pictureRepository)
+    public SendRandomPictureCommandHandler(IPictureSender pictureSender, IPictureRepository pictureRepository, IUserRepository userRepository)
     {
         _pictureSender = pictureSender;
         _pictureRepository = pictureRepository;
+        _userRepository = userRepository;
     }
 
     public async Task Handle(SendRandomPictureCommand request, CancellationToken cancellationToken)
     {
+        Picture picture = await _pictureRepository.GetRandomPictureInfoAsync();
         
-        Picture? picture = await _pictureRepository.GetRandomPictureInfoAsync();
         await _pictureSender.SendPictureAsync(
             picture, 
-            request.chatId,
+            request.ChatId,
             Statuses.WATCH);
+
+        await _userRepository.SetPictureIdForRatingAsync(
+            picId: picture.Id,
+            userId: request.ChatId);
     }
 }

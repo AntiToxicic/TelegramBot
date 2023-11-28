@@ -11,4 +11,5 @@ public class User : EntityBase
 
     public string? Name { get; set; }
     public Statuses Status { get; set; }
+    public long? PictureIdForRate { get; set; }
 }

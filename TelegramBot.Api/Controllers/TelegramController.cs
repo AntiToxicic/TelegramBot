@@ -23,7 +23,7 @@ public class TelegramController : ControllerBase
     public async Task<IActionResult> WebHook(Update update)
     {
         var msg = update.Message!;
-        Statuses status;
+        Statuses status = Statuses.START;
 
         #region Add a new User and get Status or get Status old User
         if (msg.Text == TelegramCommands.START)
@@ -33,10 +33,8 @@ public class TelegramController : ControllerBase
                 Message: BotTextAnswers.START,
                 ChatId: msg.Chat.Id,
                 Status: Statuses.START));
-            status = Statuses.START;
-        } 
-        else
-            status = (await _mediator.Send(new GetUserCommand(msg.Chat.Id))).Status;
+            return Ok();
+        }
         #endregion
 
         if (msg.Text == TelegramCommands.RULES)
@@ -48,6 +46,7 @@ public class TelegramController : ControllerBase
             return Ok();
         }
         
+        status = (await _mediator.Send(new GetUserCommand(msg.Chat.Id))).Status;
         
         switch ((int)status)
         {
@@ -66,7 +65,14 @@ public class TelegramController : ControllerBase
             case (int)Statuses.WATCH: 
                 if(msg.Text == TelegramCommands.GETPICUTRE)
                     await _mediator.Send(new SendRandomPictureCommand(
-                        chatId: msg.Chat.Id));
+                        ChatId: msg.Chat.Id));
+                else if(msg.Text == TelegramCommands.LIKE)
+                {
+                    await _mediator.Send(new SendRandomPictureCommand(
+                        ChatId: msg.Chat.Id));
+                    await _mediator.Send(new IncreasePictureRatingCommand(
+                        UserId: msg.Chat.Id));
+                }
                 else if (msg.Text == TelegramCommands.UPLOADPICTURE)
                     await _mediator.Send(new SendMessageCommand(
                         Message: BotTextAnswers.AWAITPICTURE,
@@ -98,7 +104,7 @@ public class TelegramController : ControllerBase
                         ChatId: msg.Chat.Id,
                         Status: Statuses.WATCH));
                     await _mediator.Send(new SendRandomPictureCommand(
-                        chatId: msg.Chat.Id));
+                        ChatId: msg.Chat.Id));
                 }
                 else
                     await _mediator.Send(new SendMessageCommand(

@@ -11,6 +11,8 @@ public class BotTextAnswers
     public static string ACCEPTPICTURE = _config.GetSection("BOTANSWERS").GetValue<string>("ACCEPTPICTURE")!;
     public static string WRONGANSWER = _config.GetSection("BOTANSWERS").GetValue<string>("WRONGANSWER")!;
     public static string CONTINUE = _config.GetSection("BOTANSWERS").GetValue<string>("CONTINUE")!;
+    public static string NOLIKES = _config.GetSection("BOTANSWERS").GetValue<string>("NOLIKES")!;
+    public static string LIKESCOUNT = _config.GetSection("BOTANSWERS").GetValue<string>("LIKESCOUNT")!;
     
     public static string RULES = _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE1") +
                                   _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE2") +

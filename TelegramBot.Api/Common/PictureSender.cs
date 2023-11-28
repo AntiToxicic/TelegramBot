@@ -18,18 +18,24 @@ public class PictureSender : IPictureSender
         _markupConstructor = markupConstructor;
     }
 
-    public async Task SendPictureAsync(Picture? picture, long chatId, Statuses status)
+    public async Task SendPictureAsync(Picture picture, long chatId, Statuses status)
     {
         var markup = _markupConstructor.GetMarkup(status);
+        string rating = BotTextAnswers.NOLIKES;
+
+        if (picture.Likes is not null || picture.Likes == 0) 
+            rating = BotTextAnswers.LIKESCOUNT + picture.Likes;
+            
+        string caption = $"{picture.Caption}\n\n" +
+                         $"{rating}";
         
         using (Stream stream = new FileStream(picture.Path, FileMode.Open))
         {
             await _botClient.SendPhotoAsync(
                 chatId: chatId,
                 photo: InputFile.FromStream(stream),
-                caption: picture.Caption,
+                caption: caption,
                 replyMarkup: markup);
-                
         }
     }
 }

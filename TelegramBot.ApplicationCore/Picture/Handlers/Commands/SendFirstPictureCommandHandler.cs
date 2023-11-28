@@ -21,11 +21,15 @@ public class SendFirstPictureCommandHandler : IRequestHandler<SendFirstPictureCo
     public async Task Handle(SendFirstPictureCommand request, CancellationToken cancellationToken)
     {
         await _userRepository.SetStatusAsync(request.Status, request.ChatId);
-        Picture? picture = await _pictureRepository.GetStartPictureInfoAsync();
+        Picture picture = await _pictureRepository.GetStartPictureInfoAsync();
 
         await _pictureSender.SendPictureAsync(
             picture, 
             request.ChatId,
             Statuses.WATCH);
+        
+        await _userRepository.SetPictureIdForRatingAsync(
+            picId: picture.Id,
+            userId: request.ChatId);
     }
 }

@@ -36,4 +36,13 @@ public class UserRepository : IUserRepository
                 b.SetProperty(u => u.Status, status));
          await _context.SaveChangesAsync();
     }
+
+    public async Task SetPictureIdForRatingAsync(long picId, long userId)
+    {
+        await _context.Users
+            .Where(u => u.Id == userId)
+            .ExecuteUpdateAsync(b =>
+                b.SetProperty(u => u.PictureIdForRate, picId));
+        await _context.SaveChangesAsync();
+    }
 }

@@ -2,4 +2,4 @@
 
 namespace TelegramBot.ApplicationCore.Requests.Commands;
 
-public record SaveUserInfoCommand(long UserId) : IRequest;
+public record IncreasePictureRatingCommand(long UserId) : IRequest;
