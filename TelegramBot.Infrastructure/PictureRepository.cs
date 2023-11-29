@@ -54,11 +54,10 @@ public class PictureRepository : IPictureRepository
         var picId = (await _context.Users.FirstOrDefaultAsync
             (p => p.Id == userId))!.PictureIdForRate;
         
-        int? newRating = (await _context.Pictures.FirstOrDefaultAsync
-            (p => p.Id == picId))?.Likes;
-
-        if (newRating is null) newRating = 1;
-        else newRating++;
+        int newRating = (await _context.Pictures.FirstOrDefaultAsync
+            (p => p.Id == picId))!.Likes;
+        
+        newRating++;
         
         await _context.Pictures
             .Where(u => u.Id == picId)

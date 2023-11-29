@@ -8,6 +8,7 @@ public class TelegramCommands
     
     public static string START = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("START")!;
     public static string RULES = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("RULES")!;
+    public static string STATICTIC = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("STATISTIC")!;
     public static string GETPICUTRE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETPICUTRE")!;
     public static string UPLOADPICTURE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("UPLOADPICTURE")!;
     public static string OK = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("OK")!;

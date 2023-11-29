@@ -23,7 +23,7 @@ public class PictureSender : IPictureSender
         var markup = _markupConstructor.GetMarkup(status);
         string rating = BotTextAnswers.NOLIKES;
 
-        if (picture.Likes is not null || picture.Likes == 0) 
+        if (picture.Likes is not 0) 
             rating = BotTextAnswers.LIKESCOUNT + picture.Likes;
             
         string caption = $"{picture.Caption}\n\n" +

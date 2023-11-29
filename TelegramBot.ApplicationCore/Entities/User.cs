@@ -9,6 +9,8 @@ public class User : EntityBase
         Status = status;
     }
 
+    public int Likes { get; set; } = 0;
+    public int Uploads { get; set; } = 0;
     public string? Name { get; set; }
     public Statuses Status { get; set; }
     public long? PictureIdForRate { get; set; }

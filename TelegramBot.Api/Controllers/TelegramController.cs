@@ -23,9 +23,8 @@ public class TelegramController : ControllerBase
     public async Task<IActionResult> WebHook(Update update)
     {
         var msg = update.Message!;
-        Statuses status = Statuses.START;
-
-        #region Add a new User and get Status or get Status old User
+        Statuses status = (await _mediator.Send(new GetUserCommand(msg.Chat.Id))).Status;
+        
         if (msg.Text == TelegramCommands.START)
         {
             await _mediator.Send(new SaveUserInfoCommand(msg.Chat.Id));
@@ -35,7 +34,6 @@ public class TelegramController : ControllerBase
                 Status: Statuses.START));
             return Ok();
         }
-        #endregion
 
         if (msg.Text == TelegramCommands.RULES)
         {
@@ -46,7 +44,14 @@ public class TelegramController : ControllerBase
             return Ok();
         }
         
-        status = (await _mediator.Send(new GetUserCommand(msg.Chat.Id))).Status;
+        if (msg.Text == TelegramCommands.STATICTIC)
+        {
+            await _mediator.Send(new SendUserStatisticCommand(
+                Message: BotTextAnswers.STATICTIC,
+                ChatId: msg.Chat.Id,
+                Status: status));
+            return Ok();
+        }
         
         switch ((int)status)
         {

@@ -13,9 +13,14 @@ public class BotTextAnswers
     public static string CONTINUE = _config.GetSection("BOTANSWERS").GetValue<string>("CONTINUE")!;
     public static string NOLIKES = _config.GetSection("BOTANSWERS").GetValue<string>("NOLIKES")!;
     public static string LIKESCOUNT = _config.GetSection("BOTANSWERS").GetValue<string>("LIKESCOUNT")!;
+    public static string STATICTIC = _config.GetSection("BOTANSWERS").GetSection("STATISTIC").GetValue<string>("TEMPLATE") + "\n" +
+                                     "-----\n" +
+                                      _config.GetSection("BOTANSWERS").GetSection("STATISTIC").GetValue<string>("LIKES") + "\t{0}\n" +
+                                      _config.GetSection("BOTANSWERS").GetSection("STATISTIC").GetValue<string>("UPLOADS") + "\t{1}";
     
-    public static string RULES = _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE1") +
-                                  _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE2") +
-                                  _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE3") +
+    public static string RULES = _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("TEMPLATE") + "\n" +
+                                  _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE1") + "\n" +
+                                  _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE2") + "\n" +
+                                  _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE3") + "\n" +
                                   _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE4");
 }

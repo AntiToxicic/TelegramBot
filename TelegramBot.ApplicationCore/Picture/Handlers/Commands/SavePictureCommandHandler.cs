@@ -9,15 +9,16 @@ namespace TelegramBot.ApplicationCore.Handlers.Commands;
 public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
 {
     private readonly IPictureRepository _pictureRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IPictureDownloader _pictureDownloader;
     
-    public SavePictureCommandHandler(IPictureRepository pictureRepository, IPictureDownloader pictureDownloader)
+    public SavePictureCommandHandler(IPictureRepository pictureRepository, IPictureDownloader pictureDownloader, IUserRepository userRepository)
     {
         _pictureRepository = pictureRepository;
         _pictureDownloader = pictureDownloader;
+        _userRepository = userRepository;
     }
-
-
+    
     public async Task Handle(SavePictureCommand request, CancellationToken cancellationToken)
     {
         Picture picture = await _pictureDownloader.DownloadAsync(
@@ -26,5 +27,6 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
             userId: request.UserId);
         
         await _pictureRepository.AddPictureInfoAsync(picture);
+        await _userRepository.IncreaseUserUploadsCountAsync(request.UserId);
     }
 }

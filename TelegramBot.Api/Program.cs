@@ -48,6 +48,7 @@ builder.Services.AddScoped<IRequestHandler<SendRandomPictureCommand>, SendRandom
 builder.Services.AddScoped<IRequestHandler<SaveUserInfoCommand>, SaveUserInfoCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<SendMessageCommand>, SendMessageCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<IncreasePictureRatingCommand>, IncreasePictureRatingCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<SendUserStatisticCommand>, SendUserStatisticCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<GetUserCommand, User>, GetUserCommandHandler>();
 builder.Services.AddScoped<TelegramCommands>();
 builder.Services.AddScoped<BotTextAnswers>();

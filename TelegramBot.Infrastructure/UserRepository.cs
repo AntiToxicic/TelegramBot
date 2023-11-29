@@ -45,4 +45,32 @@ public class UserRepository : IUserRepository
                 b.SetProperty(u => u.PictureIdForRate, picId));
         await _context.SaveChangesAsync();
     }
+
+    public async Task IncreaseUserRatingAsync(long userId)
+    {
+        int newRating = (await _context.Users.FirstOrDefaultAsync
+            (u => u.Id == userId))!.Likes;
+        
+        newRating++;
+        
+        await _context.Users
+            .Where(u => u.Id == userId)
+            .ExecuteUpdateAsync(b =>
+                b.SetProperty(u => u.Likes, newRating));
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task IncreaseUserUploadsCountAsync(long userId)
+    {
+        int newRating = (await _context.Users.FirstOrDefaultAsync
+            (u => u.Id == userId))!.Uploads;
+        
+        newRating++;
+        
+        await _context.Users
+            .Where(u => u.Id == userId)
+            .ExecuteUpdateAsync(b =>
+                b.SetProperty(u => u.Uploads, newRating));
+        await _context.SaveChangesAsync();
+    }
 }

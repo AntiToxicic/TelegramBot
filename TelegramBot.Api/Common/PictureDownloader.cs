@@ -35,7 +35,8 @@ public class PictureDownloader : IPictureDownloader
             caption: caption,
             userId: userId)
         {
-            Id = tempPicId
+            Id = tempPicId,
+            TelegramPicId = picId
         };
 
     }
