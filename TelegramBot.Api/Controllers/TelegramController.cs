@@ -5,6 +5,7 @@ using TelegramBot.ApplicationCore;
 using TelegramBot.ApplicationCore.Message.Requests.Commands;
 using TelegramBot.ApplicationCore.Requests.Commands;
 using TelegramBot.ApplicationCore.Requests.Queries;
+using TelegramBot.Telegram.ActionCommands;
 
 namespace TelegramBot.Telegram.Controllers;
 
@@ -24,6 +25,59 @@ public class TelegramController : ControllerBase
     {
         var msg = update.Message!;
         Statuses status = (await _mediator.Send(new GetUserCommand(msg.Chat.Id))).Status;
+        string? command = msg.Text;
+        
+        List<ActionCommand> actionCommands = new()
+        {
+            new START_ActionCommand(_mediator, status, TelegramCommands.START),
+            new RULES_ActionCommand(_mediator, status, TelegramCommands.RULES),
+            new STATISTIC_ActionCommand(_mediator, status, TelegramCommands.STATICTIC),
+            new GETSTART_ActionCommand(_mediator, Statuses.START),
+            new LIKE_ActionCommand(_mediator, Statuses.START),
+            new GETPICTURE_ActionCommand(_mediator, Statuses.START),
+            new UPLOADPICTURE_ActionCommand(_mediator, Statuses.START),
+            new GETBACK_ActionCommand(_mediator, Statuses.START)
+        };
+
+        ActionCommand wrongCommand = new WRONGANSWER_ActionCommand(_mediator, status);
+        
+        
+        foreach (var e in actionCommands)
+        {
+            if (e.Command == TelegramCommands.START ||
+                e.Command == TelegramCommands.RULES ||
+                e.Command == TelegramCommands.STATICTIC)
+            {
+                await e.Execute(update);
+                break;
+            }
+            
+            if (e.Status != status && 
+                e.Command == command)  
+            
+            if (msg.Photo is not null)
+            {
+                await e.Execute(update);
+                break;
+            }
+            
+            if (e.Status == status && 
+                e.Command == command) await e.Execute(update);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         if (msg.Text == TelegramCommands.START)
         {
@@ -56,7 +110,7 @@ public class TelegramController : ControllerBase
         switch ((int)status)
         {
            case (int)Statuses.START:
-               if (msg.Text == TelegramCommands.OK)
+               if (msg.Text == TelegramCommands.GETSTART)
                    await _mediator.Send(new SendFirstPictureCommand(
                        ChatId: msg.Chat.Id,
                        Status: Statuses.WATCH));
