@@ -15,7 +15,7 @@ public class KeyboardMarkupConstructor : IKeyboardMarkupConstructor
         {
             case Statuses.START :
                 keyboardButton = new KeyboardButton[] 
-                    { OK };
+                    { GETSTART };
                 break;
             case Statuses.WATCH : keyboardButton = new KeyboardButton[] 
                     { LIKE, 

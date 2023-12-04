@@ -23,7 +23,6 @@ public class TelegramController : ControllerBase
     public async Task<IActionResult> WebHook(Update update)
     {
         var msg = update.Message!;
-        Statuses status = (await _mediator.Send(new GetUserCommand(msg.Chat.Id))).Status;
         
         if (msg.Text == TelegramCommands.START)
         {
@@ -34,6 +33,7 @@ public class TelegramController : ControllerBase
                 Status: Statuses.START));
             return Ok();
         }
+        Statuses status = (await _mediator.Send(new GetUserCommand(msg.Chat.Id))).Status;
 
         if (msg.Text == TelegramCommands.RULES)
         {
@@ -56,7 +56,7 @@ public class TelegramController : ControllerBase
         switch ((int)status)
         {
            case (int)Statuses.START:
-               if (msg.Text == TelegramCommands.OK)
+               if (msg.Text == TelegramCommands.GETSTART)
                    await _mediator.Send(new SendFirstPictureCommand(
                        ChatId: msg.Chat.Id,
                        Status: Statuses.WATCH));

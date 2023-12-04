@@ -11,7 +11,7 @@ public class TelegramCommands
     public static string STATICTIC = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("STATISTIC")!;
     public static string GETPICUTRE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETPICUTRE")!;
     public static string UPLOADPICTURE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("UPLOADPICTURE")!;
-    public static string OK = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("OK")!;
+    public static string GETSTART = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETSTART")!;
     public static string GETBACK = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETBACK")!;
     public static string LIKE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("LIKE")!;
 }
