@@ -11,11 +11,16 @@ public class PostgresContext : DbContext
     public PostgresContext(IConfiguration config)
     {
         _config = config;
-        try
-        {
-            Database.EnsureCreated();
-        }
-        catch (Exception) {}
+        
+        if(Database.EnsureCreated())
+            Pictures.AddAsync(new Picture(
+                path: $@"{_config.GetSection("PictureStorage").GetValue<string>("StartPicture")}",
+                caption: "Это первая картинка",
+                userId: 1)
+            {
+                TelegramPicId = ""
+                
+            });
     }
 
     public DbSet<Picture> Pictures { get; set; } = null!;
@@ -26,5 +31,14 @@ public class PostgresContext : DbContext
         var name = $@"{_config.GetSection("DataBase").GetValue<string>("name")}";
         var password = $@"{_config.GetSection("DataBase").GetValue<string>("password")}";
         optionsBuilder.UseNpgsql($@"Host=localhost;Port=5432;Database={name};Username=postgres;Password={password}");
+        
+        Pictures.AddAsync(new Picture(
+            path: $@"{_config.GetSection("PictureStorage").GetValue<string>("StartPicture")}",
+            caption: "Это первая картинка",
+            userId: 1)
+        {
+            TelegramPicId = ""
+                
+        });
     }
 }

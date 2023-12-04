@@ -24,6 +24,7 @@ public class TelegramController : ControllerBase
     public async Task<IActionResult> WebHook(Update update)
     {
         var msg = update.Message!;
+        
         Statuses status = (await _mediator.Send(new GetUserCommand(msg.Chat.Id))).Status;
         string? command = msg.Text;
         
@@ -67,17 +68,7 @@ public class TelegramController : ControllerBase
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         if (msg.Text == TelegramCommands.START)
         {
