@@ -6,12 +6,12 @@ public class TelegramCommands
         .AddUserSecrets<TelegramCommands>()
         .Build();
     
-    public static string START = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("START")!;
-    public static string RULES = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("RULES")!;
-    public static string STATICTIC = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("STATISTIC")!;
-    public static string GETPICUTRE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETPICUTRE")!;
-    public static string UPLOADPICTURE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("UPLOADPICTURE")!;
-    public static string GETSTART = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETSTART")!;
-    public static string GETBACK = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETBACK")!;
-    public static string LIKE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("LIKE")!;
+    public static readonly string START = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("START")!;
+    public static readonly string RULES = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("RULES")!;
+    public static readonly string STATISTIC = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("STATISTIC")!;
+    public static readonly string GETPICUTRE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETPICUTRE")!;
+    public static readonly string UPLOADPICTURE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("UPLOADPICTURE")!;
+    public static readonly string GETSTART = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETSTART")!;
+    public static readonly string GETBACK = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETBACK")!;
+    public static readonly string LIKE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("LIKE")!;
 }

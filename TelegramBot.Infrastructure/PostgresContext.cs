@@ -19,7 +19,6 @@ public class PostgresContext : DbContext
                 userId: 1)
             {
                 TelegramPicId = ""
-                
             });
     }
 

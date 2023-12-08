@@ -14,6 +14,7 @@ using TelegramBot.ApplicationCore.Requests.Queries;
 using TelegramBot.Infrastructure;
 using TelegramBot.Telegram;
 using TelegramBot.Telegram.Common;
+using TelegramBot.Telegram.Factories;
 using TelegramBot.Telegram.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,6 +42,7 @@ builder.Services.AddScoped<IPictureSender, PictureSender>();
 builder.Services.AddScoped<IUserInfoReceiving, UserInfoReceiving>();
 builder.Services.AddScoped<IKeyboardMarkupConstructor, KeyboardMarkupConstructor>();
 builder.Services.AddScoped<IMessageSender, MessageSender>();
+builder.Services.AddScoped<IActionFactory, ActionFactory>();
 
 builder.Services.AddScoped<IRequestHandler<SavePictureCommand>, SavePictureCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<SendFirstPictureCommand>, SendFirstPictureCommandHandler>();
