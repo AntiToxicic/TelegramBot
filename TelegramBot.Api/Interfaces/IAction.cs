@@ -5,7 +5,7 @@ namespace TelegramBot.Telegram.Interfaces;
 
 public interface IAction
 {
-    public event Action<Message> ExecuteDefault;
+    public event Func<Message, Task> ExecuteDefault;
     
     Task ExecuteAsync(Message message);
 }

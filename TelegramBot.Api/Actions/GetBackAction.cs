@@ -11,21 +11,20 @@ namespace TelegramBot.Telegram.Actions;
 public class GetBackAction : IAction
 {
     private readonly IMediator _mediator;
-    public event Action<Message>? ExecuteDefault;
+    public event Func<Message, Task>? ExecuteDefault;
 
     public GetBackAction(IMediator mediator)
     {
         _mediator = mediator;
     }
-
-
+    
     public async Task ExecuteAsync(Message message)
     {
         Statuses status = (await _mediator.Send(new GetUserCommand(message.Chat.Id))).Status;
 
         if (status is not Statuses.AWAITPICTURE)
         {
-            ExecuteDefault?.Invoke(message);
+            await ExecuteDefault?.Invoke(message)!;
             return;
         }
         

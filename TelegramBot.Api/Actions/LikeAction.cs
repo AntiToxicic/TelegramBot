@@ -10,7 +10,7 @@ namespace TelegramBot.Telegram.Actions;
 public class LikeAction : IAction
 {
     private readonly IMediator _mediator;
-    public event Action<Message>? ExecuteDefault;
+    public event Func<Message, Task>? ExecuteDefault;
 
     public LikeAction(IMediator mediator)
     {
@@ -23,7 +23,7 @@ public class LikeAction : IAction
 
         if (status is not Statuses.WATCH)
         {
-            ExecuteDefault?.Invoke(message);
+            await ExecuteDefault?.Invoke(message)!;
             return;
         }
         

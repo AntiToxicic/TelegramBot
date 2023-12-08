@@ -10,7 +10,7 @@ namespace TelegramBot.Telegram.Actions;
 public class UploadPictureAction : IAction
 {
     private readonly IMediator _mediator;
-    public event Action<Message>? ExecuteDefault;
+    public event Func<Message, Task>? ExecuteDefault;
 
     public UploadPictureAction(IMediator mediator)
     {
@@ -23,7 +23,7 @@ public class UploadPictureAction : IAction
 
         if (status is not Statuses.WATCH)
         {
-            ExecuteDefault?.Invoke(message);
+            await ExecuteDefault?.Invoke(message)!;
             return;
         }
         

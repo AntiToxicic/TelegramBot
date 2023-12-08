@@ -11,7 +11,7 @@ namespace TelegramBot.Telegram.Actions;
 public class NewPictureAction : IAction
 {
     private readonly IMediator _mediator;
-    public event Action<Message>? ExecuteDefault;
+    public event Func<Message, Task>? ExecuteDefault;
 
     public NewPictureAction(IMediator mediator)
     {
@@ -24,7 +24,7 @@ public class NewPictureAction : IAction
 
         if (status is not Statuses.AWAITPICTURE)
         {
-            ExecuteDefault?.Invoke(message);
+            await ExecuteDefault?.Invoke(message)!;
             return;
         }
         

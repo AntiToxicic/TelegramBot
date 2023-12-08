@@ -10,7 +10,7 @@ namespace TelegramBot.Telegram.Actions;
 public class StartAction : IAction
 {
     private readonly IMediator _mediator;
-    public event Action<Message>? ExecuteDefault;
+    public event Func<Message, Task>? ExecuteDefault;
 
     public StartAction(IMediator mediator)
     {

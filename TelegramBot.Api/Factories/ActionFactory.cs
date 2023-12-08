@@ -30,8 +30,8 @@ public class ActionFactory : IActionFactory
         if (command == RULES) action = new RulesAction(_mediator);
         if (command == GETSTART) action = new GetStartAction(_mediator);
         if (command == START) action = new StartAction(_mediator);
-        
-        action.ExecuteDefault += message1 => new DefaultAction(_mediator).ExecuteAsync(message1);
+
+        action.ExecuteDefault += new DefaultAction(_mediator).ExecuteAsync;
         
         return action;
     }

@@ -10,14 +10,13 @@ namespace TelegramBot.Telegram.Actions;
 public class DefaultAction : IAction
 {
     private readonly IMediator _mediator;
-    public event Action<Message>? ExecuteDefault;
+    public event Func<Message, Task>? ExecuteDefault;
     
     public DefaultAction(IMediator mediator)
     {
         _mediator = mediator;
     }
-
-
+    
     public async Task ExecuteAsync(Message message)
     {
         Statuses status = (await _mediator.Send(new GetUserCommand(message.Chat.Id))).Status;
