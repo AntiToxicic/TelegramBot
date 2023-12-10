@@ -2,7 +2,7 @@
 
 public interface IMessageSender
 {
-    Task SendMessage(
+    Task SendMessageAsync(
         string message,
         long chatId,
         Statuses status);

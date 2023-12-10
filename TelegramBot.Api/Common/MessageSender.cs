@@ -17,7 +17,7 @@ public class MessageSender : IMessageSender
         _markupConstructor = markupConstructor;
     }
 
-    public async Task SendMessage(string message, long chatId, Statuses status)
+    public async Task SendMessageAsync(string message, long chatId, Statuses status)
     {
         var markup = _markupConstructor.GetMarkup(status);
         

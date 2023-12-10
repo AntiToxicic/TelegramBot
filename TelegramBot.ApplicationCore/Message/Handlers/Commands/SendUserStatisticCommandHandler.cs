@@ -23,7 +23,7 @@ public class SendUserStatisticCommandHandler : IRequestHandler<SendUserStatistic
         
         var message = String.Format(request.Message, user.Likes, user.Uploads);
         
-        await _messageSender.SendMessage(
+        await _messageSender.SendMessageAsync(
             message: message,
             chatId: request.ChatId,
             status: request.Status);

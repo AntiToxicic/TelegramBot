@@ -19,7 +19,7 @@ public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand>
     {
         await _userRepository.SetStatusAsync(request.Status, request.ChatId);
         
-        await _messageSender.SendMessage(
+        await _messageSender.SendMessageAsync(
            request.Message,
            request.ChatId,
            request.Status);

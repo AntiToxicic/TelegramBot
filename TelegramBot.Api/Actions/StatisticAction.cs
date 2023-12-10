@@ -22,7 +22,7 @@ public class StatisticAction : IAction
         Statuses status = (await _mediator.Send(new GetUserCommand(message.Chat.Id))).Status;
         
         await _mediator.Send(new SendUserStatisticCommand(
-            Message: BotTextAnswers.STATICTIC,
+            Message: BotTextAnswers.STATISTIC,
             ChatId: message.Chat.Id,
             Status: status));
     }
