@@ -13,5 +13,5 @@ public class User : EntityBase
     public int Uploads { get; set; } = 0;
     public string? Name { get; set; }
     public Statuses Status { get; set; }
-    public long PictureIdForRate { get; set; } = 1;
+    public long PictureIdForRate { get; set; }
 }

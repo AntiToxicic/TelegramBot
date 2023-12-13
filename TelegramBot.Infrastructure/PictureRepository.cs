@@ -40,6 +40,14 @@ public class PictureRepository : IPictureRepository
         return picture;
     }
 
+    public async Task<Picture> GetPicture(long picId)
+    {
+        Picture picture = _context.Pictures.FirstOrDefault(c =>
+            c.Id == picId)!;
+        
+        return picture; 
+    }
+
     public async Task<string> GeneratePathAsync(long userId)
     {
         string picPath = $@"{_config.GetSection("PictureStorage").GetValue<string>("path")}{userId}/";
@@ -51,16 +59,12 @@ public class PictureRepository : IPictureRepository
 
     public async Task IncreasePositiveRatingAsync(long userId)
     {
-        var picId = (await _context.Users.FirstOrDefaultAsync
-            (p => p.Id == userId))!.PictureIdForRate;
-        
-        int newRating = (await _context.Pictures.FirstOrDefaultAsync
-            (p => p.Id == picId))!.Rating;
-        
-        newRating++;
+        var picture = (await _context.Pictures.FirstOrDefaultAsync(p => p.UserId == userId))!;
+
+        int newRating = picture.Rating + 1;
         
         await _context.Pictures
-            .Where(u => u.Id == picId)
+            .Where(u => u.Id == picture.Id)
             .ExecuteUpdateAsync(b =>
                 b.SetProperty(u => u.Rating, newRating));
         await _context.SaveChangesAsync();
