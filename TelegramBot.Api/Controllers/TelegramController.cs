@@ -1,10 +1,5 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot.Types;
-using TelegramBot.ApplicationCore;
-using TelegramBot.ApplicationCore.Message.Requests.Commands;
-using TelegramBot.ApplicationCore.Requests.Commands;
-using TelegramBot.ApplicationCore.Requests.Queries;
 using TelegramBot.Telegram.Factories;
 
 namespace TelegramBot.Telegram.Controllers;

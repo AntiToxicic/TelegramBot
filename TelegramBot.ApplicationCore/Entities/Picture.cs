@@ -9,9 +9,9 @@ public class Picture : EntityBase
         UserId = userId;
     }
     
-    public string TelegramPicId { get; set; }
     public string Path { get; set; }
     public string? Caption { get; set; }
     public long UserId { get; set; }
-    public int Likes { get; set; } = 0;
+    public int Rating { get; set; } = 0;
+    public User[]? UsersLiked { get; set; } = null;
 }

@@ -17,9 +17,7 @@ public class PostgresContext : DbContext
                 path: $@"{_config.GetSection("PictureStorage").GetValue<string>("StartPicture")}",
                 caption: "Это первая картинка",
                 userId: 1)
-            {
-                TelegramPicId = ""
-            });
+            );
     }
 
     public DbSet<Picture> Pictures { get; set; } = null!;

@@ -21,7 +21,7 @@ public class SendUserStatisticCommandHandler : IRequestHandler<SendUserStatistic
         await _userRepository.SetStatusAsync(request.Status, request.ChatId);
         User user = await _userRepository.GetUserAsync(request.ChatId);
         
-        var message = String.Format(request.Message, user.Likes, user.Uploads);
+        var message = String.Format(request.Message, user.Rating, user.Uploads);
         
         await _messageSender.SendMessageAsync(
             message: message,

@@ -49,14 +49,14 @@ public class UserRepository : IUserRepository
     public async Task IncreaseUserRatingAsync(long userId)
     {
         int newRating = (await _context.Users.FirstOrDefaultAsync
-            (u => u.Id == userId))!.Likes;
+            (u => u.Id == userId))!.Rating;
         
         newRating++;
         
         await _context.Users
             .Where(u => u.Id == userId)
             .ExecuteUpdateAsync(b =>
-                b.SetProperty(u => u.Likes, newRating));
+                b.SetProperty(u => u.Rating, newRating));
         await _context.SaveChangesAsync();
     }
 

@@ -33,11 +33,7 @@ public class PictureDownloader : IPictureDownloader
         return new Picture(
             path: picPath,
             caption: caption,
-            userId: userId)
-        {
-            Id = tempPicId,
-            TelegramPicId = picId
-        };
+            userId: userId);
 
     }
     

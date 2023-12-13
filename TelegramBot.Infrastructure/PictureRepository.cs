@@ -55,14 +55,14 @@ public class PictureRepository : IPictureRepository
             (p => p.Id == userId))!.PictureIdForRate;
         
         int newRating = (await _context.Pictures.FirstOrDefaultAsync
-            (p => p.Id == picId))!.Likes;
+            (p => p.Id == picId))!.Rating;
         
         newRating++;
         
         await _context.Pictures
             .Where(u => u.Id == picId)
             .ExecuteUpdateAsync(b =>
-                b.SetProperty(u => u.Likes, newRating));
+                b.SetProperty(u => u.Rating, newRating));
         await _context.SaveChangesAsync();
     }
 }
