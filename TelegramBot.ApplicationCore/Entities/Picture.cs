@@ -2,16 +2,18 @@
 
 public class Picture : EntityBase
 {
-    public Picture(string path, string? caption, long userId)
+    public Picture(string path, string? caption)
     {
         Path = path;
         Caption = caption;
-        UserId = userId;
     }
     
     public string Path { get; set; }
     public string? Caption { get; set; }
-    public long UserId { get; set; }
     public int Rating { get; set; } = 0;
-    public User[]? UsersLiked { get; set; } = null;
+
+    public long UserId { get; set; }
+    public User User { get; set; } = null!;
+    
+    public ICollection<Like> Likes { get; set; } = new List<Like>();
 }

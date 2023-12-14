@@ -20,7 +20,7 @@ public class LikeAction : IAction
     public async Task ExecuteAsync(Message message)
     {
         Statuses status = (await _mediator.Send(new GetUserCommand(message.Chat.Id))).Status;
-
+        
         if (status is not Statuses.WATCH)
         {
             await ExecuteDefault?.Invoke(message)!;

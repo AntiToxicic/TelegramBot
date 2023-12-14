@@ -9,5 +9,8 @@ public interface IPictureRepository
     Task<Picture> GetStartPictureInfoAsync();
     Task<Picture> GetPicture(long picId);
     Task<string> GeneratePathAsync(long userId);
-    Task IncreasePositiveRatingAsync(long userId); 
+    Task IncreasePictureRatingAsync(long picId);
+    Task<int> GetPictureCountOfUser(long userId);
+    Task AddUserLikedAsync(long userId, long picId);
+
 }

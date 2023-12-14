@@ -9,5 +9,5 @@ public interface IUserRepository
     Task SetStatusAsync(Statuses status, long chatId);
     Task SetPictureIdForRatingAsync(long picId, long userId);
     Task IncreaseUserRatingAsync(long userId);
-    Task IncreaseUserUploadsCountAsync(long userId);
+
 }

@@ -15,12 +15,12 @@ public class PictureDownloader : IPictureDownloader
         _pictureRepository = pictureRepository;
     }
 
-    public async Task<Picture> DownloadAsync(string picId, string? caption, long userId)
+    public async Task<Picture> DownloadAsync(string picId, string? caption, User user)
     {
         var tempPicId = picId.GetHashCode();
         var path = (await _botClient.GetFileAsync(picId)).FilePath!;
         string picPath = await _pictureRepository
-                             .GeneratePathAsync(userId) + tempPicId + ".jpg";
+                             .GeneratePathAsync(user.Id) + tempPicId + ".jpg";
         
         await using (FileStream stream = File.Create(picPath))
         {
@@ -32,8 +32,11 @@ public class PictureDownloader : IPictureDownloader
 
         return new Picture(
             path: picPath,
-            caption: caption,
-            userId: userId);
+            caption: caption)
+        {
+            Id = tempPicId,
+            User = user
+        };
 
     }
     

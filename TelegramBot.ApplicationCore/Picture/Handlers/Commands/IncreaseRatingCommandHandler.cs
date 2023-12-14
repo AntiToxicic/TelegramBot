@@ -20,8 +20,9 @@ public class IncreaseRatingCommandHandler : IRequestHandler<IncreasePictureRatin
         var userRater = await _userRepository.GetUserAsync(request.UserId);
         var pictureRated = await _pictureRepository.GetPicture(userRater.PictureIdForRate);
         var userRated = await _userRepository.GetUserAsync(pictureRated.UserId);
-
-        await _pictureRepository.IncreasePositiveRatingAsync(pictureRated.Id);
+        
+        await _pictureRepository.IncreasePictureRatingAsync(pictureRated.Id);
         await _userRepository.IncreaseUserRatingAsync(userRated.Id);
+        await _pictureRepository.AddUserLikedAsync(request.UserId, pictureRated.Id);
     }
 }

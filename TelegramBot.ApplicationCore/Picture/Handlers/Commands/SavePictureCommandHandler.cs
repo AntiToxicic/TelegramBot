@@ -21,12 +21,13 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
     
     public async Task Handle(SavePictureCommand request, CancellationToken cancellationToken)
     {
+        var user = await _userRepository.GetUserAsync(request.UserId);
+        
         Picture picture = await _pictureDownloader.DownloadAsync(
             picId: request.PicId,
             caption: request.Caption,
-            userId: request.UserId);
+            user: user);
         
         await _pictureRepository.AddPictureInfoAsync(picture);
-        await _userRepository.IncreaseUserUploadsCountAsync(request.UserId);
     }
 }

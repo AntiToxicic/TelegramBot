@@ -24,7 +24,7 @@ public class PictureRepository : IPictureRepository
 
     public async Task<Picture> GetRandomPictureInfoAsync()
     {
-        Random rand = new Random();
+        var rand = new Random();
         int toSkip = rand.Next(_context.Pictures.Count());
         
         return  (await _context.Pictures.Skip(toSkip).FirstOrDefaultAsync())!;
@@ -34,15 +34,15 @@ public class PictureRepository : IPictureRepository
     {
         string? path = _config.GetSection("PictureStorage").GetValue<string>("StartPicture");
         
-        Picture picture = _context.Pictures.FirstOrDefault(c =>
-            c.Path == path)!;
+        var picture = (await _context.Pictures.FirstOrDefaultAsync(c =>
+            c.Path == path))!;
         
         return picture;
     }
 
     public async Task<Picture> GetPicture(long picId)
     {
-        Picture picture = _context.Pictures.FirstOrDefault(c =>
+        var picture = _context.Pictures.FirstOrDefault(c =>
             c.Id == picId)!;
         
         return picture; 
@@ -57,16 +57,29 @@ public class PictureRepository : IPictureRepository
         return picPath;
     }
 
-    public async Task IncreasePositiveRatingAsync(long userId)
+    public async Task IncreasePictureRatingAsync(long picId)
     {
-        var picture = (await _context.Pictures.FirstOrDefaultAsync(p => p.UserId == userId))!;
-
-        int newRating = picture.Rating + 1;
+        var picture = (await _context.Pictures.FirstOrDefaultAsync(p => p.Id == picId))!;
+        picture.Rating++;
         
-        await _context.Pictures
-            .Where(u => u.Id == picture.Id)
-            .ExecuteUpdateAsync(b =>
-                b.SetProperty(u => u.Rating, newRating));
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<int> GetPictureCountOfUser(long userId) =>
+        await _context.Pictures.CountAsync(p => p.UserId == userId);
+
+    public async Task AddUserLikedAsync(long userId, long picId)
+    {
+        var user = (await _context.Users.FirstOrDefaultAsync(u => u.Id == userId))!;
+        var picture = (await _context.Pictures.FirstOrDefaultAsync(p => p.Id == picId))!;
+
+        Like like = new Like()
+        {
+            User = user,
+            Picture = picture
+        };
+        
+        await _context.Likes.AddAsync(like);
         await _context.SaveChangesAsync();
     }
 }

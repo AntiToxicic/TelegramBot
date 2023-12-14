@@ -16,7 +16,7 @@ public class UserRepository : IUserRepository
 
     public async Task AddUserAsync(User user)
     {
-        var userTemp = await _context.Users.FirstOrDefaultAsync(c => c.Id == user.Id);
+        var userTemp = await _context.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
         
         if (userTemp is not null)
             return;
@@ -26,51 +26,29 @@ public class UserRepository : IUserRepository
     }
 
     public Task<User> GetUserAsync(long chatId) =>
-        _context.Users.FirstOrDefaultAsync(c => c.Id == chatId)!;
+        _context.Users.FirstOrDefaultAsync(u => u.Id == chatId)!;
 
     public async Task SetStatusAsync(Statuses status, long chatId)
     {
-         await _context.Users
-            .Where(u => u.Id == chatId)
-            .ExecuteUpdateAsync(b =>
-                b.SetProperty(u => u.Status, status));
-         await _context.SaveChangesAsync();
+        var user = (await _context.Users.FirstOrDefaultAsync(u => u.Id == chatId))!;
+        user.Status = status;
+        
+        await _context.SaveChangesAsync();
     }
 
     public async Task SetPictureIdForRatingAsync(long picId, long userId)
     {
-        await _context.Users
-            .Where(u => u.Id == userId)
-            .ExecuteUpdateAsync(b =>
-                b.SetProperty(u => u.PictureIdForRate, picId));
+        var user = (await _context.Users.FirstOrDefaultAsync(u => u.Id == userId))!;
+        user.PictureIdForRate = picId;
+        
         await _context.SaveChangesAsync();
     }
 
     public async Task IncreaseUserRatingAsync(long userId)
     {
-        int newRating = (await _context.Users.FirstOrDefaultAsync
-            (u => u.Id == userId))!.Rating;
+        var user = (await _context.Users.FirstOrDefaultAsync(u => u.Id == userId))!;
+        user.Rating++;
         
-        newRating++;
-        
-        await _context.Users
-            .Where(u => u.Id == userId)
-            .ExecuteUpdateAsync(b =>
-                b.SetProperty(u => u.Rating, newRating));
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task IncreaseUserUploadsCountAsync(long userId)
-    {
-        int newRating = (await _context.Users.FirstOrDefaultAsync
-            (u => u.Id == userId))!.Uploads;
-        
-        newRating++;
-        
-        await _context.Users
-            .Where(u => u.Id == userId)
-            .ExecuteUpdateAsync(b =>
-                b.SetProperty(u => u.Uploads, newRating));
         await _context.SaveChangesAsync();
     }
 }

@@ -3,5 +3,5 @@
 public class EntityBase
 {
     public long Id { get; init; }
-    public DateTimeOffset CreatedAt { get; } = DateTimeOffset.UtcNow;
+    public DateTimeOffset CreatedAt { get; init; } = DateTimeOffset.UtcNow;
 }

@@ -7,5 +7,5 @@ public interface IPictureDownloader
     public Task<Picture> DownloadAsync(
         string picId,
         string? caption,
-        long userId);
+        User user);
 }

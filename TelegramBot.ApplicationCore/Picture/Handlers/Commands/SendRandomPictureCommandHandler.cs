@@ -26,7 +26,7 @@ public class SendRandomPictureCommandHandler : IRequestHandler<SendRandomPicture
             picture, 
             request.ChatId,
             Statuses.WATCH);
-
+        
         await _userRepository.SetPictureIdForRatingAsync(
             picId: picture.Id,
             userId: request.ChatId);
