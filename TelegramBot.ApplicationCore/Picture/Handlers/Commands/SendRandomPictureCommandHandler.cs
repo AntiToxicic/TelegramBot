@@ -25,13 +25,14 @@ public class SendRandomPictureCommandHandler : IRequestHandler<SendRandomPicture
         Picture picture = await _pictureRepository.GetRandomPictureInfoAsync();
         picture.Likes = await _likeRepository.GetLikes(picture);
         
+        await _userRepository.SetPictureIdForRatingAsync(
+            picId: picture.Id,
+            userId: request.ChatId);
+        
         await _pictureSender.SendPictureAsync(
             picture, 
             request.ChatId,
             Statuses.WATCH);
         
-        await _userRepository.SetPictureIdForRatingAsync(
-            picId: picture.Id,
-            userId: request.ChatId);
     }
 }
