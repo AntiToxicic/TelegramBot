@@ -4,20 +4,20 @@ using TelegramBot.ApplicationCore.Requests.Commands;
 
 namespace TelegramBot.ApplicationCore.Handlers.Commands;
 
-public class IncreaseRatingCommandHandler : IRequestHandler<IncreasePictureRatingCommand>
+public class AddLikeCommandHandler : IRequestHandler<AddLikeCommand>
 {
     private readonly IPictureRepository _pictureRepository;
     private readonly IUserRepository _userRepository;
     private readonly ILikeRepository _likeRepository;
 
-    public IncreaseRatingCommandHandler(IPictureRepository pictureRepository, IUserRepository userRepository, ILikeRepository likeRepository)
+    public AddLikeCommandHandler(IPictureRepository pictureRepository, IUserRepository userRepository, ILikeRepository likeRepository)
     {
         _pictureRepository = pictureRepository;
         _userRepository = userRepository;
         _likeRepository = likeRepository;
     }
 
-    public async Task Handle(IncreasePictureRatingCommand request, CancellationToken cancellationToken)
+    public async Task Handle(AddLikeCommand request, CancellationToken cancellationToken)
     {
         var userRater = await _userRepository.GetUserAsync(request.UserId);
         var pictureRated = await _pictureRepository.GetPicture(userRater.PictureIdForRate);
