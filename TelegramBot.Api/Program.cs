@@ -52,7 +52,7 @@ builder.Services.AddScoped<IRequestHandler<SaveUserInfoCommand>, SaveUserInfoCom
 builder.Services.AddScoped<IRequestHandler<SendMessageCommand>, SendMessageCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<IncreasePictureRatingCommand>, IncreaseRatingCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<SendUserStatisticCommand>, SendUserStatisticCommandHandler>();
-builder.Services.AddScoped<IRequestHandler<GetUserCommand, User>, GetUserCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<GetUserCommand, User?>, GetUserCommandHandler>();
 builder.Services.AddScoped<TelegramCommands>();
 builder.Services.AddScoped<BotTextAnswers>();
 

@@ -11,6 +11,7 @@ public class BotTextAnswers
     public static string ACCEPTPICTURE = _config.GetSection("BOTANSWERS").GetValue<string>("ACCEPTPICTURE")!;
     public static string DEFAULT = _config.GetSection("BOTANSWERS").GetValue<string>("DEFAULT")!;
     public static string BADPHOTODEFAULT = _config.GetSection("BOTANSWERS").GetValue<string>("BADPHOTODEFAULT")!;
+    public static string NOTREGISTEREDDEFAULT = _config.GetSection("BOTANSWERS").GetValue<string>("NOTREGISTEREDDEFAULT")!;
     public static string CONTINUE = _config.GetSection("BOTANSWERS").GetValue<string>("CONTINUE")!;
     public static string NOLIKES = _config.GetSection("BOTANSWERS").GetValue<string>("NOLIKES")!;
     public static string LIKESCOUNT = _config.GetSection("BOTANSWERS").GetValue<string>("LIKESCOUNT")!;

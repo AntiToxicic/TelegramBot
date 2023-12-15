@@ -35,6 +35,7 @@ public class ActionFactory : IActionFactory
         {
             existAction = (IExistAction)action;
             existAction.ExecuteDefault += new DefaultAction(_mediator).ExecuteAsync;
+            existAction.ExecuteNotRegisteredDefault += new NotRegisteredDefault(_mediator).ExecuteAsync;
             action = existAction;
         }
         

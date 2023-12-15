@@ -25,7 +25,7 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task<User> GetUserAsync(long chatId) =>
+    public Task<User?> GetUserAsync(long chatId) =>
         _context.Users.FirstOrDefaultAsync(u => u.Id == chatId)!;
 
     public async Task SetStatusAsync(Statuses status, long chatId)

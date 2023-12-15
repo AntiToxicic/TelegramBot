@@ -5,4 +5,5 @@ namespace TelegramBot.Telegram.Interfaces;
 public interface IExistAction : IAction
 {
     public event Func<Message, Task> ExecuteDefault;
+    public event Func<Message, Task> ExecuteNotRegisteredDefault;
 }

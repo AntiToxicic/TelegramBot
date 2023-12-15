@@ -4,6 +4,7 @@ using TelegramBot.ApplicationCore;
 using TelegramBot.ApplicationCore.Message.Requests.Commands;
 using TelegramBot.ApplicationCore.Requests.Queries;
 using TelegramBot.Telegram.Interfaces;
+using User = TelegramBot.ApplicationCore.Entities.User;
 
 namespace TelegramBot.Telegram.Actions;
 
@@ -11,6 +12,7 @@ public class RulesExistAction : IExistAction
 {
     private readonly IMediator _mediator;
     public event Func<Message, Task>? ExecuteDefault;
+    public event Func<Message, Task>? ExecuteNotRegisteredDefault;
 
     public RulesExistAction(IMediator mediator)
     {
@@ -19,7 +21,15 @@ public class RulesExistAction : IExistAction
 
     public async Task ExecuteAsync(Message message)
     {
-        Statuses status = (await _mediator.Send(new GetUserCommand(message.Chat.Id))).Status;
+        User? user = await _mediator.Send(new GetUserCommand(message.Chat.Id));
+
+        if (user is null)
+        {
+            await ExecuteNotRegisteredDefault?.Invoke(message)!;
+            return;
+        }
+        
+        Statuses status = user!.Status;
         
         await _mediator.Send(new SendMessageCommand(
             Message: BotTextAnswers.RULES,
