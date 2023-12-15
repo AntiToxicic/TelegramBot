@@ -7,12 +7,12 @@ using TelegramBot.Telegram.Interfaces;
 
 namespace TelegramBot.Telegram.Actions;
 
-public class RulesAction : IAction
+public class RulesExistAction : IExistAction
 {
     private readonly IMediator _mediator;
     public event Func<Message, Task>? ExecuteDefault;
 
-    public RulesAction(IMediator mediator)
+    public RulesExistAction(IMediator mediator)
     {
         _mediator = mediator;
     }

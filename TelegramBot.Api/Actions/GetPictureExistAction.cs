@@ -7,12 +7,12 @@ using TelegramBot.Telegram.Interfaces;
 
 namespace TelegramBot.Telegram.Actions;
 
-public class GetPictureAction : IAction
+public class GetPictureExistAction : IExistAction
 {
     private readonly IMediator _mediator;
     public event Func<Message, Task>? ExecuteDefault;
 
-    public GetPictureAction(IMediator mediator)
+    public GetPictureExistAction(IMediator mediator)
     {
         _mediator = mediator;
     }

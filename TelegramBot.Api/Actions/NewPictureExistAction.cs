@@ -8,16 +8,16 @@ using TelegramBot.Telegram.Interfaces;
 
 namespace TelegramBot.Telegram.Actions;
 
-public class GetBackAction : IAction
+public class NewPictureExistAction : IExistAction
 {
     private readonly IMediator _mediator;
     public event Func<Message, Task>? ExecuteDefault;
 
-    public GetBackAction(IMediator mediator)
+    public NewPictureExistAction(IMediator mediator)
     {
         _mediator = mediator;
     }
-    
+
     public async Task ExecuteAsync(Message message)
     {
         Statuses status = (await _mediator.Send(new GetUserCommand(message.Chat.Id))).Status;
@@ -28,11 +28,13 @@ public class GetBackAction : IAction
             return;
         }
         
+        await _mediator.Send(new SavePictureCommand(
+            PicId: message.Photo.Last().FileId,
+            Caption: message.Caption,
+            UserId: message.Chat.Id));
         await _mediator.Send(new SendMessageCommand(
-            Message: BotTextAnswers.CONTINUE,
+            Message: BotTextAnswers.ACCEPTPICTURE,
             ChatId: message.Chat.Id,
             Status: Statuses.WATCH));
-        await _mediator.Send(new SendRandomPictureCommand(
-            ChatId: message.Chat.Id));
     }
 }

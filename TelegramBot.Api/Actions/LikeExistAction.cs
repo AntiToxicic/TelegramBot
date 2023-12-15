@@ -1,18 +1,18 @@
 ﻿using MediatR;
 using Telegram.Bot.Types;
 using TelegramBot.ApplicationCore;
-using TelegramBot.ApplicationCore.Message.Requests.Commands;
+using TelegramBot.ApplicationCore.Requests.Commands;
 using TelegramBot.ApplicationCore.Requests.Queries;
 using TelegramBot.Telegram.Interfaces;
 
 namespace TelegramBot.Telegram.Actions;
 
-public class StatisticAction : IAction
+public class LikeExistAction : IExistAction
 {
     private readonly IMediator _mediator;
     public event Func<Message, Task>? ExecuteDefault;
 
-    public StatisticAction(IMediator mediator)
+    public LikeExistAction(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -21,9 +21,15 @@ public class StatisticAction : IAction
     {
         Statuses status = (await _mediator.Send(new GetUserCommand(message.Chat.Id))).Status;
         
-        await _mediator.Send(new SendUserStatisticCommand(
-            Message: BotTextAnswers.STATISTIC,
-            ChatId: message.Chat.Id,
-            Status: status));
+        if (status is not Statuses.WATCH)
+        {
+            await ExecuteDefault?.Invoke(message)!;
+            return;
+        }
+        
+        await _mediator.Send(new SendRandomPictureCommand(
+            ChatId: message.Chat.Id));
+        await _mediator.Send(new IncreasePictureRatingCommand(
+            UserId: message.Chat.Id));
     }
 }

@@ -1,11 +1,8 @@
-﻿using Telegram.Bot.Types;
-using TelegramBot.Telegram.Actions;
+using Telegram.Bot.Types;
 
 namespace TelegramBot.Telegram.Interfaces;
 
 public interface IAction
 {
-    public event Func<Message, Task> ExecuteDefault;
-    
-    Task ExecuteAsync(Message message);
+    public Task ExecuteAsync(Message message);
 }
