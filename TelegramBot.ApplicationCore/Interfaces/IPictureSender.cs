@@ -5,7 +5,7 @@ namespace TelegramBot.ApplicationCore.Interfaces;
 public interface IPictureSender
 {
     Task SendPictureAsync(
-        Picture? picture, 
+        Picture picture, 
         long chatId,
         Statuses status);
 }

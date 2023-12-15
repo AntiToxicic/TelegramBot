@@ -57,29 +57,6 @@ public class PictureRepository : IPictureRepository
         return picPath;
     }
 
-    public async Task IncreasePictureRatingAsync(long picId)
-    {
-        var picture = (await _context.Pictures.FirstOrDefaultAsync(p => p.Id == picId))!;
-        picture.Rating++;
-        
-        await _context.SaveChangesAsync();
-    }
-
     public async Task<int> GetPictureCountOfUser(long userId) =>
         await _context.Pictures.CountAsync(p => p.UserId == userId);
-
-    public async Task AddUserLikedAsync(long userId, long picId)
-    {
-        var user = (await _context.Users.FirstOrDefaultAsync(u => u.Id == userId))!;
-        var picture = (await _context.Pictures.FirstOrDefaultAsync(p => p.Id == picId))!;
-
-        Like like = new Like()
-        {
-            User = user,
-            Picture = picture
-        };
-        
-        await _context.Likes.AddAsync(like);
-        await _context.SaveChangesAsync();
-    }
 }

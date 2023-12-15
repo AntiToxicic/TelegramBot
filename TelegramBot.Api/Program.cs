@@ -37,6 +37,7 @@ builder.Services.AddScoped<ITelegramBotClient>(c =>
 builder.Services.AddScoped<PostgresContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPictureRepository, PictureRepository>();
+builder.Services.AddScoped<ILikeRepository, LikeRepository>();
 builder.Services.AddScoped<IPictureDownloader, PictureDownloader>();
 builder.Services.AddScoped<IPictureSender, PictureSender>();
 builder.Services.AddScoped<IUserInfoReceiving, UserInfoReceiving>();

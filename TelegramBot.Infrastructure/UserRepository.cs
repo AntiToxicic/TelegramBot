@@ -43,12 +43,4 @@ public class UserRepository : IUserRepository
         
         await _context.SaveChangesAsync();
     }
-
-    public async Task IncreaseUserRatingAsync(long userId)
-    {
-        var user = (await _context.Users.FirstOrDefaultAsync(u => u.Id == userId))!;
-        user.Rating++;
-        
-        await _context.SaveChangesAsync();
-    }
 }

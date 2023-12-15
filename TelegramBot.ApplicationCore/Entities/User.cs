@@ -8,8 +8,7 @@ public class User : EntityBase
         Name = name;
         Status = status;
     }
-
-    public int Rating { get; set; } = 0;
+    
     public string? Name { get; set; }
     public Statuses Status { get; set; }
     public long PictureIdForRate { get; set; }

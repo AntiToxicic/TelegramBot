@@ -9,21 +9,24 @@ public class SendUserStatisticCommandHandler : IRequestHandler<SendUserStatistic
 {
     private readonly IUserRepository _userRepository;
     private readonly IPictureRepository _pictureRepository;
+    private readonly ILikeRepository _likeRepository;
     private readonly IMessageSender _messageSender;
 
-    public SendUserStatisticCommandHandler(IUserRepository userRepository, IMessageSender messageSender, IPictureRepository pictureRepository)
+    public SendUserStatisticCommandHandler(IUserRepository userRepository, IMessageSender messageSender, IPictureRepository pictureRepository, ILikeRepository likeRepository)
     {
         _userRepository = userRepository;
         _messageSender = messageSender;
         _pictureRepository = pictureRepository;
+        _likeRepository = likeRepository;
     }
 
     public async Task Handle(SendUserStatisticCommand request, CancellationToken cancellationToken)
     {
         User user = await _userRepository.GetUserAsync(request.ChatId);
         var picCount = await _pictureRepository.GetPictureCountOfUser(request.ChatId);
+        var rating = await _likeRepository.GetLikesCountOfUserAsync(user);
         
-        var message = String.Format(request.Message, user.Rating, picCount);
+        var message = String.Format(request.Message, rating, picCount);
         
         await _messageSender.SendMessageAsync(
             message: message,
