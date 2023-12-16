@@ -8,13 +8,13 @@ using User = TelegramBot.ApplicationCore.Entities.User;
 
 namespace TelegramBot.Telegram.Actions;
 
-public class UploadPictureExistAction : IExistAction
+public class RulesAction : IExistAction
 {
     private readonly IMediator _mediator;
     public event Func<Message, Task>? ExecuteDefault;
     public event Func<Message, Task>? ExecuteNotRegisteredDefault;
 
-    public UploadPictureExistAction(IMediator mediator)
+    public RulesAction(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -31,15 +31,9 @@ public class UploadPictureExistAction : IExistAction
         
         Statuses status = user!.Status;
         
-        if (status is not Statuses.WATCH)
-        {
-            await ExecuteDefault?.Invoke(message)!;
-            return;
-        }
-        
         await _mediator.Send(new SendMessageCommand(
-            Message: BotTextAnswers.AWAITPICTURE,
+            Message: BotTextAnswers.RULES,
             ChatId: message.Chat.Id,
-            Status: Statuses.AWAITPICTURE));
+            Status: status));
     }
 }

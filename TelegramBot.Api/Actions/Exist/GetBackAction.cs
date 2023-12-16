@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Telegram.Bot.Types;
 using TelegramBot.ApplicationCore;
+using TelegramBot.ApplicationCore.Message.Requests.Commands;
 using TelegramBot.ApplicationCore.Requests.Commands;
 using TelegramBot.ApplicationCore.Requests.Queries;
 using TelegramBot.Telegram.Interfaces;
@@ -8,17 +9,17 @@ using User = TelegramBot.ApplicationCore.Entities.User;
 
 namespace TelegramBot.Telegram.Actions;
 
-public class GetPictureExistAction : IExistAction
+public class GetBackAction : IExistAction
 {
     private readonly IMediator _mediator;
     public event Func<Message, Task>? ExecuteDefault;
     public event Func<Message, Task>? ExecuteNotRegisteredDefault;
 
-    public GetPictureExistAction(IMediator mediator)
+    public GetBackAction(IMediator mediator)
     {
         _mediator = mediator;
     }
-
+    
     public async Task ExecuteAsync(Message message)
     {
         User? user = await _mediator.Send(new GetUserCommand(message.Chat.Id));
@@ -31,12 +32,16 @@ public class GetPictureExistAction : IExistAction
         
         Statuses status = user!.Status;
         
-        if(status is not Statuses.WATCH)
+        if (status is not Statuses.AWAITPICTURE)
         {
             await ExecuteDefault?.Invoke(message)!;
             return;
         }
         
+        await _mediator.Send(new SendMessageCommand(
+            Message: BotTextAnswers.CONTINUE,
+            ChatId: message.Chat.Id,
+            Status: Statuses.WATCH));
         await _mediator.Send(new SendRandomPictureCommand(
             ChatId: message.Chat.Id));
     }

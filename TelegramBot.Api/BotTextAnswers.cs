@@ -2,6 +2,7 @@
 
 public class BotTextAnswers
 {
+    
     private static readonly IConfiguration _config = new ConfigurationBuilder()
         .AddUserSecrets<TelegramCommands>()
         .Build();

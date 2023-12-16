@@ -7,7 +7,7 @@ using TelegramBot.Telegram.Interfaces;
 
 namespace TelegramBot.Telegram.Actions;
 
-public class NotRegisteredDefault : IDefaultAction
+public class NotRegisteredDefault : IAction
 {
     private readonly IMediator _mediator;
     

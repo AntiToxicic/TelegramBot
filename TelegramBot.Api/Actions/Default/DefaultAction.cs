@@ -8,7 +8,7 @@ using User = TelegramBot.ApplicationCore.Entities.User;
 
 namespace TelegramBot.Telegram.Actions;
 
-public class DefaultAction : IDefaultAction
+public class DefaultAction : IAction
 {
     private readonly IMediator _mediator;
     

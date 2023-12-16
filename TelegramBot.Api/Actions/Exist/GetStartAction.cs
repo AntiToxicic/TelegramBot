@@ -1,20 +1,20 @@
 ﻿using MediatR;
 using Telegram.Bot.Types;
 using TelegramBot.ApplicationCore;
-using TelegramBot.ApplicationCore.Message.Requests.Commands;
+using TelegramBot.ApplicationCore.Requests.Commands;
 using TelegramBot.ApplicationCore.Requests.Queries;
 using TelegramBot.Telegram.Interfaces;
 using User = TelegramBot.ApplicationCore.Entities.User;
 
 namespace TelegramBot.Telegram.Actions;
 
-public class StatisticExistAction : IExistAction
+public class GetStartAction : IExistAction
 {
     private readonly IMediator _mediator;
     public event Func<Message, Task>? ExecuteDefault;
     public event Func<Message, Task>? ExecuteNotRegisteredDefault;
 
-    public StatisticExistAction(IMediator mediator)
+    public GetStartAction(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -31,9 +31,14 @@ public class StatisticExistAction : IExistAction
         
         Statuses status = user!.Status;
         
-        await _mediator.Send(new SendUserStatisticCommand(
-            Message: BotTextAnswers.STATISTIC,
+        if (status is not Statuses.START)
+        {
+            await ExecuteDefault?.Invoke(message)!;
+            return;
+        }
+        
+        await _mediator.Send(new SendFirstPictureCommand(
             ChatId: message.Chat.Id,
-            Status: status));
+            Status: Statuses.WATCH));
     }
 }
