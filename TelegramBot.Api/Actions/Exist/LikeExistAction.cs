@@ -37,8 +37,8 @@ public class LikeExistAction : IExistAction
             return;
         }
         
-        await _mediator.Send(new AddLikeCommand(
-            UserId: message.Chat.Id));
+        _mediator.Send(new AddLikeCommand(
+            UserId: message.Chat.Id)).Wait();
         await _mediator.Send(new SendRandomPictureCommand(
             ChatId: message.Chat.Id));
     }
