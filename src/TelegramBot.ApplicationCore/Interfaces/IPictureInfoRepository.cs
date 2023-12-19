@@ -6,5 +6,4 @@ public interface IPictureInfoRepository
 {
     Task AddAsync(PictureInfo picture, CancellationToken cancellationToken);
     Task<PictureInfo?> Random(CancellationToken cancellationToken);
-    Task IterLikeCount(long id, CancellationToken cancellationToken);
 }

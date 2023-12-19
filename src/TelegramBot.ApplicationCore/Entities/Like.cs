@@ -1,10 +1,10 @@
+using TelegramBot.ApplicationCore.Common;
+
 namespace TelegramBot.ApplicationCore.Entities;
 
-public class Like
+public class Like : EntityBase
 {
-    public Like()
-    {
-    }
+    public Like() { }
 
     public Like(long userId, long pictureInfoId)
     {

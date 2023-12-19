@@ -12,11 +12,9 @@ public class LikeRepository : ILikeRepository
         _context = context;
     }
 
-    public async Task<bool> AddIfNotExistAsync(Like like, CancellationToken cancellationToken)
+    public async Task AddIfNotExistAsync(Like like, CancellationToken cancellationToken)
     {
         await _context.Likes.AddAsync(like, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
-
-        return true;
     }
 }

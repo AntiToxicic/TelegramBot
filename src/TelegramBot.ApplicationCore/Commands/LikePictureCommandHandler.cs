@@ -29,25 +29,16 @@ public class LikePictureCommandHandler : IRequestHandler<LikePictureCommand>
         var user = await _userRepository.GetOrCreate(command.ChatId, command.Name, cancellationToken);
 
         if (!user.LastReceivedPictureInfoId.HasValue)
-        {
             throw new Exception();
-        }
 
         var like = new Like(user.Id, user.LastReceivedPictureInfoId.Value);
 
-        var isLikeNew = await _likeRepository.AddIfNotExistAsync(like, cancellationToken);
-
-        if (isLikeNew)
-        {
-            await _pictureRepository.IterLikeCount(user.LastReceivedPictureInfoId.Value, cancellationToken);
-        }
+        await _likeRepository.AddIfNotExistAsync(like, cancellationToken);
 
         var randomPictureInfo = await _pictureRepository.Random(cancellationToken);
 
         if (randomPictureInfo == null)
-        {
             throw new Exception();
-        }
 
         await _pictureService.Send(user.ChatId, randomPictureInfo, cancellationToken);
 

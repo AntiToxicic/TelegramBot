@@ -34,7 +34,7 @@ public class TelegramController : ControllerBase
                 case Commands.LikePicture: await _mediator.Send(_mapper.Map<LikePictureCommand>(message)); break;
             }
         }
-        else if (message?.Photo != null)
+        else if (message?.Photo is not null)
         {
             await _mediator.Send(_mapper.Map<SavePictureCommand>(message));
         }

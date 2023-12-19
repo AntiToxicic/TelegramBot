@@ -16,6 +16,4 @@ public class PictureInfo : EntityBase
 
     public string Path { get; set; }
     public string? Caption { get; set; }
-
-    public uint LikeCount { get; set; }
 }
