@@ -19,7 +19,7 @@ public class PictureInfoRepository : IPictureInfoRepository
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<PictureInfo?> Random(CancellationToken cancellationToken)
+    public async Task<PictureInfo?> GetRandomPictureAsync(CancellationToken cancellationToken)
     {
         // TODO: change implementation
         var rand = new Random();

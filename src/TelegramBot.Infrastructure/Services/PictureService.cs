@@ -19,15 +19,13 @@ public class PictureService : IPictureService
         _pictureStorageOptions = pictureStorageOptions.Value;
     }
 
-    public async Task<string> Download(string id, CancellationToken cancellationToken)
+    public async Task<string> DownloadAsync(long chatId, string id, CancellationToken cancellationToken)
     {
         var file = await _telegramBotClient.GetFileAsync(id, cancellationToken);
 
-        if (file == null)
-        {
+        if (file is null)
             throw new Exception();
-        }
-
+        
         var path = Path.Combine(_pictureStorageOptions.BasePath, file.FilePath!);
 
         await using var pictureStream = File.Create(path);
@@ -37,10 +35,10 @@ public class PictureService : IPictureService
         return path;
     }
 
-    public async Task Send(long chatId, PictureInfo pictureInfo, CancellationToken cancellationToken)
+    public async Task SendPictureAsync(long chatId, PictureInfo pictureInfo, CancellationToken cancellationToken)
     {
         // TODO: relative path
-        var path = Path.Combine(_pictureStorageOptions.BasePath, pictureInfo.Path);
+        var path = Path.Combine(_pictureStorageOptions.BasePath, pictureInfo.UriPath);
 
         await using var pictureStream = new FileStream(path, FileMode.Open);
 

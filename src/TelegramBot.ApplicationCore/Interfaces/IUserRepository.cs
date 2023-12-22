@@ -4,7 +4,8 @@ namespace TelegramBot.ApplicationCore.Interfaces;
 
 public interface IUserRepository
 {
-    Task<User> GetOrCreate(long chatId, string name, CancellationToken cancellationToken);
+    Task<User?> GetUserAsync(long chatId, CancellationToken cancellationToken);
+    Task AddUserAsync(User user, CancellationToken cancellationToken);
 
-    Task UpdateLastReceivedPictureInfoId(long userId, long lastReceivedPictureInfoId, CancellationToken cancellationToken);
+    Task UpdateLastReceivedPictureInfoIdAsync(User user, long lastReceivedPictureInfoId, CancellationToken cancellationToken);
 }

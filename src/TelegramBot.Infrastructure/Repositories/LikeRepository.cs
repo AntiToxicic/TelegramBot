@@ -1,4 +1,7 @@
+using System.ComponentModel;
+using System.Data.Common;
 using TelegramBot.ApplicationCore.Entities;
+using TelegramBot.ApplicationCore.Exceptions;
 using TelegramBot.ApplicationCore.Interfaces;
 
 namespace TelegramBot.Infrastructure.Repositories;
@@ -14,7 +17,14 @@ public class LikeRepository : ILikeRepository
 
     public async Task AddIfNotExistAsync(Like like, CancellationToken cancellationToken)
     {
-        await _context.Likes.AddAsync(like, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
+        try
+        {
+            await _context.Likes.AddAsync(like, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+        catch (DbException e)
+        {
+            throw new LikeAlreadyExistExeption();
+        }
     }
 }

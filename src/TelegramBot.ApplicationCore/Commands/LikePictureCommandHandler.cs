@@ -1,5 +1,6 @@
 using MediatR;
 using TelegramBot.ApplicationCore.Entities;
+using TelegramBot.ApplicationCore.Enums;
 using TelegramBot.ApplicationCore.Exceptions;
 using TelegramBot.ApplicationCore.Interfaces;
 
@@ -26,22 +27,32 @@ public class LikePictureCommandHandler : IRequestHandler<LikePictureCommand>
 
     public async Task Handle(LikePictureCommand command, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetOrCreate(command.ChatId, command.Name, cancellationToken);
+        var user = await _userRepository.GetUserAsync(command.ChatId, cancellationToken);
 
-        if (!user.LastReceivedPictureInfoId.HasValue)
+        if (user is null)
+            throw new UserNotFoundException();
+
+        if (user.Status is not UserStatus.Watch)
+            throw new InvalidUserStatusException();
+
+        if (user.LastReceivedPictureInfoId.HasValue is not true)
             throw new Exception();
 
         var like = new Like(user.Id, user.LastReceivedPictureInfoId.Value);
 
-        await _likeRepository.AddIfNotExistAsync(like, cancellationToken);
+        try
+        {
+            await _likeRepository.AddIfNotExistAsync(like, cancellationToken);
+        }
+        catch (LikeAlreadyExistExeption e) { }
 
-        var randomPictureInfo = await _pictureRepository.Random(cancellationToken);
+        var randomPictureInfo = await _pictureRepository.GetRandomPictureAsync(cancellationToken);
 
-        if (randomPictureInfo == null)
+        if (randomPictureInfo is null)
             throw new Exception();
 
-        await _pictureService.Send(user.ChatId, randomPictureInfo, cancellationToken);
-
-        await _userRepository.UpdateLastReceivedPictureInfoId(user.Id, randomPictureInfo.Id, cancellationToken);
+        await _userRepository.UpdateLastReceivedPictureInfoIdAsync(user, randomPictureInfo.Id, cancellationToken);
+        
+        await _pictureService.SendPictureAsync(user.ChatId, randomPictureInfo, cancellationToken);
     }
 }

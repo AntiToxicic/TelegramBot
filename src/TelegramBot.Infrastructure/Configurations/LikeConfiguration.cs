@@ -8,7 +8,7 @@ public class LikeConfiguration : IEntityTypeConfiguration<Like>
 {
     public void Configure(EntityTypeBuilder<Like> builder)
     {
-        builder.HasKey(c => new { c.UserId, c.PictureInfoId });
+        builder.HasKey(c => new { c.UserId, c.PictureInfoId});
 
         builder
             .HasOne(c => c.User)
@@ -17,5 +17,7 @@ public class LikeConfiguration : IEntityTypeConfiguration<Like>
         builder
             .HasOne(c => c.PictureInfo)
             .WithMany();
+
+        builder.HasIndex(c => new {c.PictureInfoId, c.UserId}).IsUnique();
     }
 }

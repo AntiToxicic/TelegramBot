@@ -8,15 +8,14 @@ namespace TelegramBot.Infrastructure;
 public class PostgresContext : DbContext
 {
     private readonly IConfiguration _config;
-    
-    public DbSet<PictureInfo> PicturesInfos { get; set; } = null!;
-    public DbSet<User> Users { get; set; } = null!;
-    public DbSet<Like> Likes { get; set; } = null!;
 
-    public PostgresContext(DbContextOptions options, IConfiguration config) : base(options)
+    public PostgresContext(DbContextOptions<PostgresContext> options, IConfiguration config) : base(options)
     {
         _config = config;
     }
+    public DbSet<PictureInfo> PicturesInfos { get; set; } = null!;
+    public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Like> Likes { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

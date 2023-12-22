@@ -25,9 +25,15 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
 
     public async Task Handle(SavePictureCommand command, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetOrCreate(command.ChatId, command.Name, cancellationToken);
+        var user = await _userRepository.GetUserAsync(command.ChatId, cancellationToken);
+        
+        if (user is null)
+            throw new UserNotFoundException();
 
-        var path = await _pictureService.Download(command.PicId, cancellationToken);
+        if (user.Status is not UserStatus.AwaitPicture)
+            throw new InvalidUserStatusException();
+
+        var path = await _pictureService.DownloadAsync(user.ChatId, command.PicId, cancellationToken);
 
         var pictureInfo = new PictureInfo(user.Id, path, command.Caption);
 

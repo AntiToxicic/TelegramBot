@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TelegramBot.Infrastructure;
@@ -11,9 +12,11 @@ using TelegramBot.Infrastructure;
 namespace TelegramBot.Infrastructure.Migrations
 {
     [DbContext(typeof(PostgresContext))]
-    partial class PostgresContextModelSnapshot : ModelSnapshot
+    [Migration("20231220080212_AddEntityDataAndRemoveEntitiesLikeCount")]
+    partial class AddEntityDataAndRemoveEntitiesLikeCount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,7 @@ namespace TelegramBot.Infrastructure.Migrations
 
                     b.HasIndex("PictureInfoId");
 
-                    b.ToTable("Likes", (string)null);
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("TelegramBot.ApplicationCore.Entities.PictureInfo", b =>
@@ -57,7 +60,7 @@ namespace TelegramBot.Infrastructure.Migrations
                     b.Property<DateTimeOffset>("CraatedBy")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("UriPath")
+                    b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -66,7 +69,7 @@ namespace TelegramBot.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PicturesInfos", (string)null);
+                    b.ToTable("PicturesInfos");
                 });
 
             modelBuilder.Entity("TelegramBot.ApplicationCore.Entities.User", b =>
@@ -91,7 +94,7 @@ namespace TelegramBot.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TelegramBot.ApplicationCore.Entities.Like", b =>

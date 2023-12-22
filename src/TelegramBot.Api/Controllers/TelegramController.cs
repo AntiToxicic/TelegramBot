@@ -30,8 +30,8 @@ public class TelegramController : ControllerBase
         {
             switch (command)
             {
-                case Commands.Next: await _mediator.Send(_mapper.Map<SendRandomPictureCommand>(message)); break;
-                case Commands.LikePicture: await _mediator.Send(_mapper.Map<LikePictureCommand>(message)); break;
+                case Command.NextPicture: await _mediator.Send(_mapper.Map<SendRandomPictureCommand>(message)); break;
+                case Command.LikePicture: await _mediator.Send(_mapper.Map<LikePictureCommand>(message)); break;
             }
         }
         else if (message?.Photo is not null)

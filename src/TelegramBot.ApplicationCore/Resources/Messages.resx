@@ -18,22 +18,31 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Rules" xml:space="preserve">
-        <value>1</value>
-    </data>
-    <data name="Continue" xml:space="preserve">
-        <value>2</value>
-    </data>
-    <data name="AcceptPicture" xml:space="preserve">
-        <value>3</value>
-    </data>
-    <data name="AwaitPicture" xml:space="preserve">
-        <value>4</value>
-    </data>
-    <data name="Statistic" xml:space="preserve">
-        <value>5</value>
-    </data>
-    <data name="Start" xml:space="preserve">
-        <value>6</value>
-    </data>
+  <data name="Start" xml:space="preserve">
+    <value>Добро пожаловать в наш бот!\nПросматривайте смешные картинки и загружайте свои. Для больше информации используйте\n\n\t</value>
+  </data>
+  <data name="AwaitPicture" xml:space="preserve">
+    <value>Ждем вашу картинку :)</value>
+  </data>
+  <data name="AcceptPicture" xml:space="preserve">
+    <value>Ваша картинка принята!</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Нет такого ответа :(</value>
+  </data>
+  <data name="BadPictureDefault" xml:space="preserve">
+    <value>Вы можете отправить только одну картинку за раз</value>
+  </data>
+  <data name="NotRegisteredDefault" xml:space="preserve">
+    <value>Бот обновился! Вы были заново зарегестрированны.</value>
+  </data>
+  <data name="LikesCount" xml:space="preserve">
+    <value>Лайков: {0}</value>
+  </data>
+  <data name="Statistic" xml:space="preserve">
+    <value>Статистика:\n\uD83D\uDC4D Оценок: {0}\n\uD83D\uDCE4 Картинок загружено: {1}</value>
+  </data>
+  <data name="Rules" xml:space="preserve">
+    <value>Правила \uD83D\uDCDD:\n1. Не отправлять дубликаты\n2. Не отправлять картинки сексуального характера\n3. Не отправлять DickPick (Перманент сразу же)\n4. Не портить атмосферу сообщеста, здесь люди хотят получать хорошие эмоции, а не плохие</value>
+  </data>
 </root>

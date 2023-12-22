@@ -13,26 +13,17 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<User> GetOrCreate(long chatId, string name, CancellationToken cancellationToken)
+    public async Task<User?> GetUserAsync(long chatId, CancellationToken cancellationToken) =>
+        await _context.Users.FirstOrDefaultAsync(c => c.ChatId == chatId, cancellationToken);
+
+    public async Task AddUserAsync(User user, CancellationToken cancellationToken)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(c => c.ChatId == chatId, cancellationToken);
-
-        // TODO: change implementation
-        if (user == null)
-        {
-            user = new User(chatId, name);
-
-            await _context.Users.AddAsync(user, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
-        }
-
-        return user;
+        await _context.Users.AddAsync(user, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task UpdateLastReceivedPictureInfoId(long userId, long lastReceivedPictureInfoId, CancellationToken cancellationToken)
+    public async Task UpdateLastReceivedPictureInfoIdAsync(User user, long lastReceivedPictureInfoId, CancellationToken cancellationToken)
     {
-        var user = await _context.Users.FirstAsync(c => c.Id == userId, cancellationToken);
-
         user.LastReceivedPictureInfoId = lastReceivedPictureInfoId;
 
         _context.Users.Update(user);

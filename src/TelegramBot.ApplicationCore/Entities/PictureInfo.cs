@@ -5,15 +5,15 @@ namespace TelegramBot.ApplicationCore.Entities;
 public class PictureInfo : EntityBase
 {
     public PictureInfo() { }
-    public PictureInfo(long userId, string path, string? caption)
+    public PictureInfo(long userId, string uriPath, string? caption)
     {
         UserId = userId;
-        Path = path;
+        UriPath = uriPath;
         Caption = caption;
     }
 
-    public long UserId { get; set; }
+    public long UserId { get; private set; }
 
-    public string Path { get; set; }
-    public string? Caption { get; set; }
+    public string UriPath { get; private set; }
+    public string? Caption { get; private set; }
 }

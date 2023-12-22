@@ -13,8 +13,7 @@ public class User : EntityBase
     }
 
     public long? LastReceivedPictureInfoId { get; set; }
-
-    public long ChatId { get; set; }
-
+    public long ChatId { get; init; }
     public string? Name { get; set; }
+    public UserStatus Status { get; set; } = UserStatus.Start;
 }
