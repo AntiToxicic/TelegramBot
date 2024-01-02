@@ -32,3 +32,4 @@ C:\_Alex\Code\TelegramBot\TelegramBot.Infrastructure\obj\Debug\net7.0\refint\Tel
 C:\_Alex\Code\TelegramBot\TelegramBot.Infrastructure\obj\Debug\net7.0\TelegramBot.Infrastructure.pdb
 C:\_Alex\Code\TelegramBot\TelegramBot.Infrastructure\obj\Debug\net7.0\TelegramBot.Infrastructure.genruntimeconfig.cache
 C:\_Alex\Code\TelegramBot\TelegramBot.Infrastructure\obj\Debug\net7.0\ref\TelegramBot.Infrastructure.dll
+C:\_Alex\Code\TelegramBot\TelegramBot.Infrastructure\obj\Debug\net7.0\TelegramBot.Infrastructure.sourcelink.json

@@ -21,3 +21,4 @@ C:\_Alex\Code\TelegramBot\TelegramBot.ApplicationCore\obj\Debug\net7.0\TelegramB
 C:\_Alex\Code\TelegramBot\TelegramBot.ApplicationCore\obj\Debug\net7.0\refint\TelegramBot.ApplicationCore.dll
 C:\_Alex\Code\TelegramBot\TelegramBot.ApplicationCore\obj\Debug\net7.0\TelegramBot.ApplicationCore.pdb
 C:\_Alex\Code\TelegramBot\TelegramBot.ApplicationCore\obj\Debug\net7.0\ref\TelegramBot.ApplicationCore.dll
+C:\_Alex\Code\TelegramBot\TelegramBot.ApplicationCore\obj\Debug\net7.0\TelegramBot.ApplicationCore.sourcelink.json

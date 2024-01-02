@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+K0trsEzDFhODl7nAF5Gt1En85DNltjS2iuUXIEY6JgV/uRPRCyUYOCfwSDxy4jjZJcWmDaP50dQd1gP+D32xg==",
+  "dgSpecHash": "2oD2xPgyQdkppcIjoDXN5nGuifKeNyW4n+rsczETgn57brMDFgnAeRBVRPSEQIfSyTKCn2p/ZKe/B/cgInmIxQ==",
   "success": true,
   "projectFilePath": "C:\\_Alex\\Code\\TelegramBot\\TelegramBot.ApplicationCore\\TelegramBot.ApplicationCore.csproj",
   "expectedPackageFiles": [
@@ -12,7 +12,10 @@
     "C:\\Users\\Alex\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\Alex\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
-    "C:\\Users\\Alex\\.nuget\\packages\\telegram.bot\\19.0.0\\telegram.bot.19.0.0.nupkg.sha512"
+    "C:\\Users\\Alex\\.nuget\\packages\\telegram.bot\\19.0.0\\telegram.bot.19.0.0.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\Alex\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512"
   ],
   "logs": []
 }
