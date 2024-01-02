@@ -24,11 +24,12 @@ public class PictureRepository : IPictureRepository
 
     public async Task<Picture> GetRandomPictureInfoAsync()
     {
-        var rand = new Random();
-        int toSkip = rand.Next(_context.Pictures.Count());
-        
-        return  (await _context.Pictures.Skip(toSkip).FirstOrDefaultAsync())!;
+        return (await _context.Pictures
+            .OrderBy(p => EF.Functions.Random())
+            .FirstOrDefaultAsync())!;
     }
+
+
 
     public async Task<Picture> GetStartPictureInfoAsync()
     {
