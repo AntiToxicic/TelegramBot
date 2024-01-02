@@ -53,6 +53,9 @@ builder.Services.AddScoped<IRequestHandler<SendMessageCommand>, SendMessageComma
 builder.Services.AddScoped<IRequestHandler<AddLikeCommand>, AddLikeCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<SendUserStatisticCommand>, SendUserStatisticCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<GetUserCommand, User?>, GetUserCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<DeleteAllUserPicturesCommand>, DeleteAllUserPicturesCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<DeletePictureCommand, User>, DeletePictureCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<BanUserCommand, User>, BanUserCommandHandler>();
 builder.Services.AddScoped<TelegramCommands>();
 builder.Services.AddScoped<BotTextAnswers>();
 

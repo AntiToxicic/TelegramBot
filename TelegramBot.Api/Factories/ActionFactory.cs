@@ -30,6 +30,8 @@ public class ActionFactory : IActionFactory
         else if (command == RULES) action = new RulesAction(_mediator);
         else if (command == GETSTART) action = new GetStartAction(_mediator);
         else if (command == START) action = new StartAction(_mediator);
+        else if (command == DELETEPICTURE) action = new DeletePictureAction(_mediator);
+        else if (command == BANUSER) action = new BanUserAction(_mediator);
 
         if (action is IExistAction existAction)
         {

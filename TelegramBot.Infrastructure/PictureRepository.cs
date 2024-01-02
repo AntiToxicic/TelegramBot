@@ -59,4 +59,39 @@ public class PictureRepository : IPictureRepository
 
     public async Task<int> GetPictureCountOfUser(long userId) =>
         await _context.Pictures.CountAsync(p => p.UserId == userId);
+
+    public async Task DeleteAllUserPictures(long userId)
+    {
+        var admin = await _context.Users.FirstOrDefaultAsync(a => a.Id == userId);
+        var picture = await _context.Pictures.FirstOrDefaultAsync(p => p.Id == admin.PictureIdForRate);
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == picture.UserId);
+
+        var allPictures = await _context.Pictures.Where(p => p.UserId == user.Id).ToListAsync();
+
+        foreach (var pic in allPictures)
+        {
+            string path = pic.Path;
+
+            if (File.Exists(path))
+                File.Delete(path);
+
+            _context.Pictures.Remove(pic);
+        }
+
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<User> DeleteUserPicture(long userId)
+    {
+        var admin = await _context.Users.FirstOrDefaultAsync(a => a.Id == userId);
+        var picture = await _context.Pictures.FirstOrDefaultAsync(p => p.Id == admin.PictureIdForRate);
+
+        if (File.Exists((picture.Path)))
+            File.Delete(picture.Path);
+        
+        _context.Pictures.Remove(picture);
+        await _context.SaveChangesAsync();
+
+        return (await _context.Users.FirstOrDefaultAsync(u => u.Id == picture.UserId))!;
+    }
 }

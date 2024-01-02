@@ -43,4 +43,18 @@ public class UserRepository : IUserRepository
         
         await _context.SaveChangesAsync();
     }
+
+    public async Task<User> BanUserAsync(long userId)
+    {
+        var admin =  await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+        var id = (await _context.Pictures.FirstOrDefaultAsync(p => p.Id == admin.PictureIdForRate)).UserId;
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+        user.Status = Statuses.BANNED;
+
+        await _context.SaveChangesAsync();
+
+        return user;
+    }
 }

@@ -26,4 +26,9 @@ public class BotTextAnswers
                                   _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE2") + "\n" +
                                   _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE3") + "\n" +
                                   _config.GetSection("BOTANSWERS").GetSection("RULES").GetValue<string>("RULE4");
+    
+    public static string YOUWEREBANNED = _config.GetSection("BOTANSWERS").GetValue<string>("YOUWEREBANNED")!;
+    public static string YOURPICTUREWEREDELETED = _config.GetSection("BOTANSWERS").GetValue<string>("YOURPICTUREWEREDELETED")!;
+    public static string USERWASBANNED = _config.GetSection("BOTANSWERS").GetValue<string>("USERWASBANNED")!;
+    public static string USERPICUTREWASDELETED = _config.GetSection("BOTANSWERS").GetValue<string>("USERPICUTREWASDELETED")!;
 }

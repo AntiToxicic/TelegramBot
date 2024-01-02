@@ -14,4 +14,6 @@ public class TelegramCommands
     public static readonly string GETSTART = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETSTART")!;
     public static readonly string GETBACK = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("GETBACK")!;
     public static readonly string LIKE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("LIKE")!;
+    public static readonly string BANUSER = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("BANUSER")!;
+    public static readonly string DELETEPICTURE = _config.GetSection("TELEGRAMCOMMANDS").GetValue<string>("DELETEPICTURE")!;
 }

@@ -8,4 +8,5 @@ public interface IUserRepository
     Task<User?> GetUserAsync(long chatId);
     Task SetStatusAsync(Statuses status, long chatId);
     Task SetPictureIdForRatingAsync(long picId, long userId);
+    Task<User> BanUserAsync(long userId);
 }

@@ -10,4 +10,6 @@ public interface IPictureRepository
     Task<Picture> GetPicture(long picId);
     Task<string> GeneratePathAsync(long userId);
     Task<int> GetPictureCountOfUser(long userId);
+    Task DeleteAllUserPictures(long userId);
+    Task<User> DeleteUserPicture(long userId);
 }
