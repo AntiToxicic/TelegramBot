@@ -2,7 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using TelegramBot.ApplicationCore;
 using TelegramBot.Infrastructure;
+using TelegramBot.Infrastructure.Interfaces;
 using TelegramBot.Infrastructure.Options;
+using TelegramBot.Infrastructure.TelegramBotClients;
 using TelegramBot.Telegram.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,10 +19,22 @@ builder.Services.AddDbContext<PostgresContext>(
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblyContaining(typeof(ApplicationCoreMarker)));
 
+/*
 builder.Services.AddHttpClient<ITelegramBotClient, TelegramBotClient>(c =>
 {
     var telegramOptions = builder.Configuration.GetSection(nameof(TelegramOptions)).Get<TelegramOptions>();
     return new TelegramBotClient(telegramOptions!.Token, c);
+});
+*/
+
+builder.Services.AddHttpClient<IAdminsTelegramBotClient, AdminsTelegramBotClient>(c =>
+{
+    return new AdminsTelegramBotClient("admintoken", c);
+});
+
+builder.Services.AddHttpClient<IClientsTelegramBotClient, ClientsTelegramBotClient>(c =>
+{
+    return new ClientsTelegramBotClient("clienttoken", c);
 });
 
 builder.Services.Configure<PictureStorageOptions>(builder.Configuration.GetSection(nameof(PictureStorageOptions)));
