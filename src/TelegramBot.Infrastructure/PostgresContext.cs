@@ -26,6 +26,7 @@ public class PostgresContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        
         var name = $@"{_config.GetSection("DataBase").GetValue<string>("name")}";
         var password = $@"{_config.GetSection("DataBase").GetValue<string>("password")}";
         optionsBuilder.UseNpgsql($@"Host=localhost;Port=5432;Database={name};Username=postgres;Password={password}");
