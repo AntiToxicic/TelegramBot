@@ -40,7 +40,7 @@ public class PictureSender : IPictureSender
         }
         else
         {
-                caption += $"\n<pre><code class=\"Уведомления\">\nПользователь \"{user.Name}\" добавил картинку</code></pre>";
+                caption += $"\n<pre><code class=Уведомления>\nПользователь \"{user.Name}\" добавил картинку</code></pre>";
         }
         
         using (Stream stream = new FileStream(picture.Path, FileMode.Open))
