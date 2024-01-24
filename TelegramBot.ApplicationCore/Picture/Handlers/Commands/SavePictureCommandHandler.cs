@@ -31,11 +31,12 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
             user: user);
         
         await _pictureRepository.AddPictureInfoAsync(picture);
-        var picture2 = await _pictureRepository.GetPicture(picture.Id);
         
         await _pictureSender.SendPictureAsync(
-            picture2, 
+            picture, 
             -1002001774648,
-            Statuses.WATCH, 3);
+            Statuses.WATCH, 
+            3,
+            user);
     }
 }
