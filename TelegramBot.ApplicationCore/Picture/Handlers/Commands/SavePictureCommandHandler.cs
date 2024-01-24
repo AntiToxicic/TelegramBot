@@ -31,11 +31,13 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
             user: user);
         
         await _pictureRepository.AddPictureInfoAsync(picture);
+
+        var picture2 = picture;
         
-        picture.Caption += $"\n\nПользователь \"{user.Name}\" добавил картинку";
+        picture2.Caption += $"\n\nПользователь \"{user.Name}\" добавил картинку";
         
         await _pictureSender.SendPictureAsync(
-            picture, 
+            picture2, 
             -1002001774648,
             Statuses.WATCH, 3);
     }
