@@ -1,5 +1,6 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.ReplyMarkups;
 using TelegramBot.ApplicationCore;
 using TelegramBot.ApplicationCore.Entities;
 using TelegramBot.ApplicationCore.Interfaces;
@@ -20,14 +21,22 @@ public class PictureSender : IPictureSender
 
     public async Task SendPictureAsync(Picture picture, long chatId, Statuses status, int? messageThread = null)
     {
-        var markup = _markupConstructor.GetMarkup(status);
-        string rating = BotTextAnswers.NOLIKES;
+        ReplyKeyboardMarkup? markup = null;
+        string? caption = picture.Caption;
+        
+        
+        if (messageThread is not null)
+        {
+            markup = _markupConstructor.GetMarkup(status);
+            string rating = BotTextAnswers.NOLIKES;
 
-        if (picture.Likes is not null) 
-            rating = BotTextAnswers.LIKESCOUNT + picture.Likes.Count;
+            if (picture.Likes is not null) 
+                rating = BotTextAnswers.LIKESCOUNT + picture.Likes.Count;
             
-        string caption = $"{picture.Caption}\n\n" +
-                         $"{rating}";
+            caption += $"\n\n" +
+                             $"{rating}";
+        }
+        
         
         using (Stream stream = new FileStream(picture.Path, FileMode.Open))
         {
