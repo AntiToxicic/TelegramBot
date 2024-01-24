@@ -25,7 +25,7 @@ public class PictureSender : IPictureSender
         string? caption = picture.Caption;
         
         
-        if (messageThread is not null)
+        if (messageThread is null)
         {
             markup = _markupConstructor.GetMarkup(status);
             string rating = BotTextAnswers.NOLIKES;
