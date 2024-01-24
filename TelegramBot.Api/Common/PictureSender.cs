@@ -18,7 +18,7 @@ public class PictureSender : IPictureSender
         _markupConstructor = markupConstructor;
     }
 
-    public async Task SendPictureAsync(Picture picture, long chatId, Statuses status)
+    public async Task SendPictureAsync(Picture picture, long chatId, Statuses status, int? messageThread = null)
     {
         var markup = _markupConstructor.GetMarkup(status);
         string rating = BotTextAnswers.NOLIKES;
@@ -33,6 +33,7 @@ public class PictureSender : IPictureSender
         {
             await _botClient.SendPhotoAsync(
                 chatId: chatId,
+                messageThreadId: messageThread,
                 photo: InputFile.FromStream(stream),
                 caption: caption,
                 replyMarkup: markup);

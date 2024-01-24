@@ -11,12 +11,14 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
     private readonly IPictureRepository _pictureRepository;
     private readonly IUserRepository _userRepository;
     private readonly IPictureDownloader _pictureDownloader;
+    private readonly IPictureSender _pictureSender;
     
-    public SavePictureCommandHandler(IPictureRepository pictureRepository, IPictureDownloader pictureDownloader, IUserRepository userRepository)
+    public SavePictureCommandHandler(IPictureRepository pictureRepository, IPictureDownloader pictureDownloader, IUserRepository userRepository, IPictureSender pictureSender)
     {
         _pictureRepository = pictureRepository;
         _pictureDownloader = pictureDownloader;
         _userRepository = userRepository;
+        _pictureSender = pictureSender;
     }
     
     public async Task Handle(SavePictureCommand request, CancellationToken cancellationToken)
@@ -29,5 +31,12 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
             user: user);
         
         await _pictureRepository.AddPictureInfoAsync(picture);
+        
+        picture.Caption = $"Пользователь \"{user.Name}\" добавил картинку";
+        
+        await _pictureSender.SendPictureAsync(
+            picture, 
+            -1002001774648,
+            Statuses.WATCH, 3);
     }
 }

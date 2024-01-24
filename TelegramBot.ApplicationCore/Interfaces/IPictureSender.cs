@@ -7,5 +7,5 @@ public interface IPictureSender
     Task SendPictureAsync(
         Picture picture, 
         long chatId,
-        Statuses status);
+        Statuses status, int? messageThread = null);
 }
