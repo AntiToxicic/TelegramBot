@@ -33,8 +33,6 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
         await _pictureRepository.AddPictureInfoAsync(picture);
         var picture2 = await _pictureRepository.GetPicture(picture.Id);
         
-        picture2.Caption += $"\n\nПользователь \"{user.Name}\" добавил картинку";
-        
         await _pictureSender.SendPictureAsync(
             picture2, 
             -1002001774648,

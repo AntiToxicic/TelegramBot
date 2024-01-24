@@ -5,6 +5,7 @@ using TelegramBot.ApplicationCore;
 using TelegramBot.ApplicationCore.Entities;
 using TelegramBot.ApplicationCore.Interfaces;
 using TelegramBot.Telegram.Interfaces;
+using User = TelegramBot.ApplicationCore.Entities.User;
 
 namespace TelegramBot.Telegram.Common;
 
@@ -19,13 +20,13 @@ public class PictureSender : IPictureSender
         _markupConstructor = markupConstructor;
     }
 
-    public async Task SendPictureAsync(Picture picture, long chatId, Statuses status, int? messageThread = null)
+    public async Task SendPictureAsync(Picture picture, long chatId, Statuses status, int? messageThread = null, User? user = null)
     {
         ReplyKeyboardMarkup? markup = null;
         string? caption = picture.Caption;
         
         
-        if (messageThread is null)
+        if (messageThread is null || user is null)
         {
             markup = _markupConstructor.GetMarkup(status);
             string rating = BotTextAnswers.NOLIKES;
@@ -35,6 +36,10 @@ public class PictureSender : IPictureSender
             
             caption += $"\n\n" +
                              $"{rating}";
+        }
+        else
+        {
+            caption += $"\n\nПользователь \"{user.Name}\" добавил картинку";
         }
         
         
