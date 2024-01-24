@@ -1,5 +1,6 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using TelegramBot.ApplicationCore;
 using TelegramBot.ApplicationCore.Entities;
@@ -39,15 +40,15 @@ public class PictureSender : IPictureSender
         }
         else
         {
-            caption += $"\n\nПользователь \"{user.Name}\" добавил картинку";
+                caption += $"\n<pre><code class=\"Уведомления\">\nПользователь \"{user.Name}\" добавил картинку</code></pre>";
         }
-        
         
         using (Stream stream = new FileStream(picture.Path, FileMode.Open))
         {
             await _botClient.SendPhotoAsync(
                 chatId: chatId,
                 messageThreadId: messageThread,
+                parseMode: ParseMode.Html,
                 photo: InputFile.FromStream(stream),
                 caption: caption,
                 replyMarkup: markup);
