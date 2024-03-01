@@ -13,18 +13,18 @@ public class PictureInfoRepository : IPictureInfoRepository
         _context = context;
     }
 
-    public async Task AddAsync(PictureInfo picture, CancellationToken cancellationToken)
+    public async Task AddAsync(Picture picture, CancellationToken cancellationToken)
     {
-        await _context.PicturesInfos.AddAsync(picture, cancellationToken);
+        await _context.Pictures.AddAsync(picture, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<PictureInfo?> GetRandomPictureAsync(CancellationToken cancellationToken)
+    public async Task<Picture?> GetRandomPictureAsync(CancellationToken cancellationToken)
     {
         // TODO: change implementation
         var rand = new Random();
-        int toSkip = rand.Next(_context.PicturesInfos.Count());
+        int toSkip = rand.Next(_context.Pictures.Count());
 
-        return await _context.PicturesInfos.Skip(toSkip).FirstOrDefaultAsync(cancellationToken);
+        return await _context.Pictures.Skip(toSkip).FirstOrDefaultAsync(cancellationToken);
     }
 }

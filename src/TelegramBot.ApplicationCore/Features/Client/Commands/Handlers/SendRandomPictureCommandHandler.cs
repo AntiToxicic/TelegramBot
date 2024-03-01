@@ -3,7 +3,7 @@ using TelegramBot.ApplicationCore.Enums;
 using TelegramBot.ApplicationCore.Exceptions;
 using TelegramBot.ApplicationCore.Interfaces;
 
-namespace TelegramBot.ApplicationCore.Commands;
+namespace TelegramBot.ApplicationCore.Features.Commands;
 
 public class SendRandomPictureCommandHandler : IRequestHandler<SendRandomPictureCommand>
 {

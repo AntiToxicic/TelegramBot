@@ -10,18 +10,18 @@ namespace TelegramBot.Infrastructure.Services;
 
 public class PictureService : IPictureService
 {
-    private readonly ITelegramBotClient _telegramBotClient;
+    private readonly ITelegramBotClient _botClient;
     private readonly PictureStorageOptions _pictureStorageOptions;
 
-    public PictureService(ITelegramBotClient telegramBotClient, IOptions<PictureStorageOptions> pictureStorageOptions)
+    public PictureService(ITelegramBotClient botClient, IOptions<PictureStorageOptions> pictureStorageOptions)
     {
-        _telegramBotClient = telegramBotClient;
+        _botClient = botClient;
         _pictureStorageOptions = pictureStorageOptions.Value;
     }
 
     public async Task<string> DownloadAsync(long chatId, string id, CancellationToken cancellationToken)
     {
-        var file = await _telegramBotClient.GetFileAsync(id, cancellationToken);
+        var file = await _botClient.GetFileAsync(id, cancellationToken);
 
         if (file is null)
             throw new Exception();
@@ -30,22 +30,22 @@ public class PictureService : IPictureService
 
         await using var pictureStream = File.Create(path);
 
-        await _telegramBotClient.DownloadFileAsync(file.FilePath!, pictureStream, cancellationToken);
+        await _botClient.DownloadFileAsync(file.FilePath!, pictureStream, cancellationToken);
 
         return path;
     }
 
-    public async Task SendPictureAsync(long chatId, PictureInfo pictureInfo, CancellationToken cancellationToken)
+    public async Task SendPictureAsync(long chatId, Picture picture, CancellationToken cancellationToken)
     {
         // TODO: relative path
-        var path = Path.Combine(_pictureStorageOptions.BasePath, pictureInfo.UriPath);
+        var path = Path.Combine(_pictureStorageOptions.BasePath, picture.UriPath);
 
         await using var pictureStream = new FileStream(path, FileMode.Open);
 
-        await _telegramBotClient.SendPhotoAsync(
+        await _botClient.SendPhotoAsync(
             chatId: chatId,
             photo: InputFile.FromStream(pictureStream),
-            caption: pictureInfo.Caption!,
+            caption: picture.Caption!,
             cancellationToken: cancellationToken);
     }
 }

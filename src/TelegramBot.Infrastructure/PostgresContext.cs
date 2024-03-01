@@ -13,7 +13,7 @@ public class PostgresContext : DbContext
     {
         _config = config;
     }
-    public DbSet<PictureInfo> PicturesInfos { get; set; } = null!;
+    public DbSet<Picture> Pictures { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Like> Likes { get; set; } = null!;
 

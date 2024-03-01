@@ -4,6 +4,6 @@ namespace TelegramBot.ApplicationCore.Interfaces;
 
 public interface IPictureInfoRepository
 {
-    Task AddAsync(PictureInfo picture, CancellationToken cancellationToken);
-    Task<PictureInfo?> GetRandomPictureAsync(CancellationToken cancellationToken);
+    Task AddAsync(Picture picture, CancellationToken cancellationToken);
+    Task<Picture?> GetRandomPictureAsync(CancellationToken cancellationToken);
 }

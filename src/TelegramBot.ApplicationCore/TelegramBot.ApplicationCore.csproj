@@ -24,4 +24,7 @@
             <DependentUpon>Messages.resx</DependentUpon>
         </Compile>
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Features\Client\" />
+    </ItemGroup>
 </Project>

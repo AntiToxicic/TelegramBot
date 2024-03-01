@@ -3,9 +3,8 @@ using TelegramBot.ApplicationCore.Entities;
 using TelegramBot.ApplicationCore.Enums;
 using TelegramBot.ApplicationCore.Exceptions;
 using TelegramBot.ApplicationCore.Interfaces;
-using TelegramBot.ApplicationCore.Resources;
 
-namespace TelegramBot.ApplicationCore.Commands;
+namespace TelegramBot.ApplicationCore.Features.Commands;
 
 public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
 {
@@ -35,7 +34,7 @@ public class SavePictureCommandHandler : IRequestHandler<SavePictureCommand>
 
         var path = await _pictureService.DownloadAsync(user.ChatId, command.PicId, cancellationToken);
 
-        var pictureInfo = new PictureInfo(user.Id, path, command.Caption);
+        var pictureInfo = new Picture(user.Id, path, command.Caption);
 
         await _pictureRepository.AddAsync(pictureInfo, cancellationToken);
     }

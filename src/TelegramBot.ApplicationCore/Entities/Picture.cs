@@ -2,10 +2,10 @@ using TelegramBot.ApplicationCore.Common;
 
 namespace TelegramBot.ApplicationCore.Entities;
 
-public class PictureInfo : EntityBase
+public class Picture : EntityBase
 {
-    public PictureInfo() { }
-    public PictureInfo(long userId, string uriPath, string? caption)
+    public Picture() { }
+    public Picture(long userId, string uriPath, string? caption)
     {
         UserId = userId;
         UriPath = uriPath;

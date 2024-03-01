@@ -6,5 +6,5 @@ public interface IPictureService
 {
     Task<string> DownloadAsync(long chatId, string id, CancellationToken cancellationToken);
 
-    Task SendPictureAsync(long chatId, PictureInfo picture, CancellationToken cancellationToken);
+    Task SendPictureAsync(long chatId, Picture picture, CancellationToken cancellationToken);
 }

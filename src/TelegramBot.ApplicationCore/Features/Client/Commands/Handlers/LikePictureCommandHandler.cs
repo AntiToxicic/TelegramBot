@@ -4,7 +4,7 @@ using TelegramBot.ApplicationCore.Enums;
 using TelegramBot.ApplicationCore.Exceptions;
 using TelegramBot.ApplicationCore.Interfaces;
 
-namespace TelegramBot.ApplicationCore.Commands;
+namespace TelegramBot.ApplicationCore.Features.Commands;
 
 public class LikePictureCommandHandler : IRequestHandler<LikePictureCommand>
 {
@@ -44,7 +44,10 @@ public class LikePictureCommandHandler : IRequestHandler<LikePictureCommand>
         {
             await _likeRepository.AddIfNotExistAsync(like, cancellationToken);
         }
-        catch (LikeAlreadyExistExeption e) { }
+        catch (LikeAlreadyExistExeption e)
+        {
+            throw new LikeAlreadyExistExeption();
+        }
 
         var randomPictureInfo = await _pictureRepository.GetRandomPictureAsync(cancellationToken);
 

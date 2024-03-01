@@ -4,9 +4,9 @@ using TelegramBot.ApplicationCore.Entities;
 
 namespace TelegramBot.Infrastructure.Configurations;
 
-public class PictureInfoConfiguration : IEntityTypeConfiguration<PictureInfo>
+public class PictureInfoConfiguration : IEntityTypeConfiguration<Picture>
 {
-    public void Configure(EntityTypeBuilder<PictureInfo> builder)
+    public void Configure(EntityTypeBuilder<Picture> builder)
     {
         builder.HasKey(c => c.Id);
     }

@@ -15,7 +15,7 @@ public class LikeConfiguration : IEntityTypeConfiguration<Like>
             .WithMany();
 
         builder
-            .HasOne(c => c.PictureInfo)
+            .HasOne(c => c.Picture)
             .WithMany();
 
         builder.HasIndex(c => new {c.PictureInfoId, c.UserId}).IsUnique();

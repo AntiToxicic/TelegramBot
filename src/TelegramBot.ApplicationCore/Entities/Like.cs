@@ -18,5 +18,5 @@ public class Like : EntityBase
 
     public long PictureInfoId { get; private set; }
 
-    public virtual PictureInfo PictureInfo { get; set; } = null!;
+    public virtual Picture Picture { get; set; } = null!;
 }
