@@ -5,7 +5,7 @@
 
 <center>
   <a href="https://t.me/OnlypicsBot">
-    <img src="https://i.imgur.com/0bVyKzL.jpg" title="source: imgur.com" width="50%" height="50%" />
+    <img src="https://imgur.com/FiIw4vE" title="source: imgur.com" width="50%" height="50%" />
   </a>
 </center>
 
